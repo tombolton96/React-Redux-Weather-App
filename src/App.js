@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import DayCard from './components/DayCard/DayCard';
 
 class App extends Component {
@@ -12,14 +12,22 @@ class App extends Component {
     this.state = {
       location: {
         latitude: undefined,
-        longitude: undefined
-      }
+        longitude: undefined,
+        city: '',
+        country: ''
+      },
+      weather: {
+        description: '',
+        temperature: 0,
+        icon: ''
+      },
+      isLoading: true
     };
   }
 
-  // componentDidMount() {
-  //   this.getLocation();
-  // }
+  componentDidMount() {
+    this.getLocation();
+  }
 
   getLocation() {
     if (navigator.geolocation) {
@@ -39,8 +47,40 @@ class App extends Component {
         longitude: lon
       }
     });
-    // let url = createWeatherUrl(lat, lon);
-    // console.log('url:', url);
+
+    let url = this.createWeatherUrl(lat, lon, process.env.REACT_APP_API_KEY);
+
+    fetch(url)
+      .then(results => {
+        if (results.status !== 200) {
+          console.log(`There was a problem. Status code: ${results.status}`)
+        } 
+         return results.json();
+      }).then(data => {
+        console.log(data);
+
+        this.setState({
+          location: {
+            ...this.state.location,
+            city: data.name,
+            country: data.sys.country
+          },
+          weather: {
+            description: data.weather[0].description,
+            temperature: data.main.temp,
+            icon: data.weather[0].icon
+          },
+          isLoading: false
+        });
+      }).catch(err => console.log(err));
+  }
+
+  createWeatherUrl(latitude, longitude, key) {
+    return `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
+  }
+
+  createForecastUrl(latitude, longitude, key) {
+    return `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
 
   showError(error) {
@@ -61,10 +101,13 @@ class App extends Component {
   }
 
   render() {
-    return (
+    return this.state.isLoading 
+    ? (<div>Loading...</div>) 
+    : (
       <div className="App">
-        <button onClick={this.getLocation}>Get Location</button>
-        <DayCard currentLocation={this.state.location}/>
+      <h3>{this.state.location.city}, {this.state.location.country}</h3>
+        <DayCard
+          weather={this.state.weather}/>
       </div>
     );
   }
