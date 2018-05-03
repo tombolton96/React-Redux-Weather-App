@@ -73,7 +73,7 @@ class DayCard extends Component {
                 <h3>{this.state.day}</h3>
                 <p>{this.state.date}</p>
                 <p>{this.state.weather.temperature}&deg;C</p>
-                <img src={`http://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
+                <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
                 <p>{this.state.weather.description}</p>
             </div>
         );
