@@ -21,6 +21,7 @@ class App extends Component {
         temperature: 0,
         icon: ''
       },
+      date: '',
       isLoading: true
     };
   }
@@ -70,6 +71,7 @@ class App extends Component {
             temperature: data.main.temp,
             icon: data.weather[0].icon
           },
+          date: data.dt,
           isLoading: false
         });
       }).catch(err => console.log(err));
@@ -107,7 +109,8 @@ class App extends Component {
       <div className="App">
       <h3>{this.state.location.city}, {this.state.location.country}</h3>
         <DayCard
-          weather={this.state.weather}/>
+          weather={this.state.weather}
+          date={this.state.date}/>
       </div>
     );
   }
