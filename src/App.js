@@ -88,7 +88,7 @@ class App extends Component {
   showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            console.log("User denied the request for Geolocation.")
+            console.log("User denied the request for Geolocation")
             break;
         case error.POSITION_UNAVAILABLE:
             console.log("Location information is unavailable.")
