@@ -78,11 +78,11 @@ class App extends Component {
   }
 
   createWeatherUrl(latitude, longitude, key) {
-    return `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
 
   createForecastUrl(latitude, longitude, key) {
-    return `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
+    return `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
 
   showError(error) {
