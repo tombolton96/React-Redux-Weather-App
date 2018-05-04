@@ -71,7 +71,7 @@ class DayCard extends Component {
         return(
             <div className="container">
                 <h3>{this.state.day}</h3>
-                <p>{this.state.date}</p>
+                {/* <p>{this.state.date}</p> */}
                 <p>{this.state.weather.temperature}&deg;C</p>
                 <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
                 <p>{this.state.weather.description}</p>
