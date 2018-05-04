@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import nighttheme from '../../nightTheme.scss';
 import './DayCard.scss';
 
 class DayCard extends Component {
@@ -13,6 +14,8 @@ class DayCard extends Component {
             weather: {
                 description: props.weather.description,
                 temperature: props.weather.temperature,
+                minTemp: props.weather.minTemp,
+                maxTemp: props.weather.maxTemp,
                 icon: props.weather.icon
             },
             date: this.getDate(props.date),
@@ -72,9 +75,13 @@ class DayCard extends Component {
             <div className="container">
                 <h3>{this.state.day}</h3>
                 {/* <p>{this.state.date}</p> */}
-                <p>{this.state.weather.temperature}&deg;C</p>
+                <div className="temp">
+                    <p className="minmax">{this.state.weather.maxTemp} </p> 
+                    <p>{this.state.weather.temperature}&deg;C</p>
+                    <p className="minmax"> {this.state.weather.minTemp}</p>
+                </div>
                 <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
-                <p>{this.state.weather.description}</p>
+                <p className="capitalise">{this.state.weather.description}</p>
             </div>
         );
     }
