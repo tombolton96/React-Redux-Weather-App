@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import theme from '../../index.scss';
+// import theme from '../../index.scss';
 import './DayCard.scss';
 
 class DayCard extends Component {
@@ -58,7 +58,7 @@ class DayCard extends Component {
                     <p>{this.state.weather.temperature}&deg;C</p>
                 </div>
                 <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
-                <p className="capitalise">{this.state.weather.description}</p>
+                <p className='capitalise'>{this.state.weather.description}</p>
             </div>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import theme from './index.scss';
+import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
 
@@ -9,6 +9,7 @@ class App extends Component {
 
     this.getLocation = this.getLocation.bind(this);
     this.getPosition = this.getPosition.bind(this);
+    this.setBackground = this.setBackground.bind(this);
 
     this.state = {
       location: {
@@ -29,6 +30,10 @@ class App extends Component {
 
   componentDidMount() {
     this.getLocation();
+  }
+
+  componentDidUpdate() {
+    this.setBackground(this.state.weather.description);
   }
 
   getLocation() {
@@ -86,20 +91,53 @@ class App extends Component {
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
 
+  setBackground(weather) {
+    switch(weather) {
+      case 'clear sky':
+        document.body.className = 'clear';
+        break;
+      case 'few clouds':
+        document.body.className = 'few';
+        break;
+      case 'scattered clouds':
+        document.body.className = 'scattered';
+        break;
+      case 'broken clouds':
+        document.body.className = 'broken';
+        break;
+      case 'shower rain':
+      case 'rain':
+        document.body.className = 'rain';
+        break;
+      case 'thunderstorm':
+        document.body.className = 'storm';
+        break;
+      case 'snow':
+        document.body.className = 'snow';
+        break;
+      case 'mist':
+        document.body.className = 'mist';
+        break;
+      default:
+        break;
+    }
+  }
+
   showError(error) {
     switch(error.code) {
-        case error.PERMISSION_DENIED:
-            console.log("User denied the request for Geolocation")
-            break;
-        case error.POSITION_UNAVAILABLE:
-            console.log("Location information is unavailable.")
-            break;
-        case error.TIMEOUT:
-            console.log("The request to get user location timed out.")
-            break;
-        case error.UNKNOWN_ERROR:
-            console.log("An unknown error occurred.")
-            break;
+      case error.PERMISSION_DENIED:
+        console.log("User denied the request for Geolocation")
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.log("Location information is unavailable")
+        break;
+      case error.TIMEOUT:
+        console.log("The request to get user location timed out")
+        break;
+      case error.UNKNOWN_ERROR:
+      default:
+        console.log("An unknown error occurred")
+        break;
     }
   }
 
