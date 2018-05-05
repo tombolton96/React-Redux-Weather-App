@@ -1,3 +1,5 @@
+@import './Assets/images.scss';
+
 body {
     display: flex;
     justify-content: center;
@@ -5,4 +7,36 @@ body {
     flex-direction: column;
     color: #fff;
     font-family: Raleway, sans-serif;
+}
+
+.clear {
+    background-image: $clearsky;
+}
+
+.storm {
+    background-image: $storm;
+}
+
+.snow {
+    background-image: $snow;
+}
+
+.rain {
+    background-image: $rain;
+}
+
+.scattered {
+    background-image: $scattered;
+}
+
+.mist {
+    background-image: $mist;
+}
+
+.few {
+    background-image: $fewclouds;
+}
+
+.broken {
+    background-image: $broken;
 }

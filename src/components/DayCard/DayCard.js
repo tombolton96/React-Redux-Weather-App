@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import theme from '../../index.scss';
+import '../../index.scss';
 import './DayCard.scss';
 
 class DayCard extends Component {
