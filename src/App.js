@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
+import SearchBar from './components/SearchBar/SearchBar';
 
 class App extends Component {
   constructor() {
@@ -146,6 +147,7 @@ class App extends Component {
     ? (<div>Loading...</div>) 
     : (
       <div className="App">
+      <SearchBar className="searchbar"/>
       <h2>{this.state.location.city}, {this.state.location.country}</h2>
         <DayCard
           weather={this.state.weather}
