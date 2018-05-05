@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import nighttheme from './nightTheme.scss';
+import theme from './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
 
@@ -20,8 +20,6 @@ class App extends Component {
       weather: {
         description: '',
         temperature: 0,
-        minTemp: 0,
-        maxTemp: 0,
         icon: ''
       },
       date: '',
@@ -72,8 +70,6 @@ class App extends Component {
           weather: {
             description: data.weather[0].description,
             temperature: data.main.temp,
-            minTemp: data.main.temp_min,
-            maxTemp: data.main.temp_max,
             icon: data.weather[0].icon
           },
           date: data.dt,

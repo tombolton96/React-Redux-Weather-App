@@ -1,0 +1,10 @@
+@import './Assets/images.scss';
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Raleway, sans-serif; font-family: sans-serif;
+  background-image: $clearsky;
+  color: #fff;
+}

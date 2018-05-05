@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import nighttheme from '../../nightTheme.scss';
+import theme from '../../index.scss';
 import './DayCard.scss';
 
 class DayCard extends Component {
@@ -14,18 +14,11 @@ class DayCard extends Component {
             weather: {
                 description: props.weather.description,
                 temperature: props.weather.temperature,
-                minTemp: props.weather.minTemp,
-                maxTemp: props.weather.maxTemp,
                 icon: props.weather.icon
             },
-            date: this.getDate(props.date),
             day: this.getDay(props.date)
         };
     }
-
-    getDate(ms) {
-        return new Date(ms * 1000).toLocaleDateString();
-      }
 
     getDay(ms) {
         const day = new Date(ms * 1000).getDay();
@@ -57,28 +50,12 @@ class DayCard extends Component {
         }
     }
 
-    // componentWillReceiveProps(newProps) {
-    //     this.setState({
-    //         // location: {
-    //         //     city: newProps.currentLocation.city,
-    //         //     country: newProps.currentLocation.country
-    //         // },
-    //         weather: {
-    //             description: newProps.weather.description,
-    //             temperature: newProps.weather.temperature
-    //         }
-    //     });
-    // }
-
     render() {
         return(
-            <div className="container">
+            <div className='container'>
                 <h3>{this.state.day}</h3>
-                {/* <p>{this.state.date}</p> */}
                 <div className="temp">
-                    <p className="minmax">{this.state.weather.maxTemp} </p> 
                     <p>{this.state.weather.temperature}&deg;C</p>
-                    <p className="minmax"> {this.state.weather.minTemp}</p>
                 </div>
                 <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
                 <p className="capitalise">{this.state.weather.description}</p>
