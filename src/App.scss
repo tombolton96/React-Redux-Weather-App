@@ -7,6 +7,18 @@ body {
     flex-direction: column;
     color: #fff;
     font-family: Raleway, sans-serif;
+
+    h2 {
+        text-align: center;
+        span {
+            font-size: 40%;
+        }  
+    }
+}
+
+.searchbar {
+    margin: 5%;
+    width: 100%;
 }
 
 .clear {

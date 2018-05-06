@@ -1,0 +1,39 @@
+.searchbar {
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    border-radius: 200px;
+    line-height: 3em;
+    border: 1px outset rgba(255,255,255, 0.5);
+    color: #fff;
+    padding: 6px;
+    margin-left: 2px;
+    background: rgba(255,255,255, 0.5);
+    cursor: pointer;
+    outline: none;
+
+    &:active {
+        border: 1px inset rgba(255,255,255, 0.5);
+    }
+}
+
+input {
+    border-radius: 50px;
+    outline: none;
+    border: 1px solid #fff;
+    padding: 5px;
+    margin-right: 2px;
+    background: none;
+    color: #fff;
+    font-family: inherit;
+
+    &::placeholder {
+        color: #fff;
+    }
+
+    &:focus {
+        box-shadow: 0 0 10px rgba(221,221,221, 0.5);
+    }
+}
