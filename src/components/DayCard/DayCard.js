@@ -7,17 +7,24 @@ class DayCard extends Component {
         super(props);
 
         this.state = {
-            location: {
-                city: '',
-                country: ''
-            },
             weather: {
-                description: props.weather.description,
-                temperature: props.weather.temperature,
-                icon: props.weather.icon
+                description: '',
+                temperature: undefined,
+                icon: ''
             },
-            day: this.getDay(props.date)
+            day: ''
         };
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({
+            weather: {
+                description: newProps.weather.description,
+                temperature: newProps.weather.temperature,
+                icon: newProps.weather.icon
+            },
+            day: this.getDay(newProps.date)
+        });
     }
 
     getDay(ms) {

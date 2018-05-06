@@ -11,6 +11,7 @@ class App extends Component {
     this.getLocation = this.getLocation.bind(this);
     this.getPosition = this.getPosition.bind(this);
     this.setBackground = this.setBackground.bind(this);
+    this.getSearchData = this.getSearchData.bind(this);
 
     this.state = {
       location: {
@@ -65,7 +66,7 @@ class App extends Component {
         } 
          return results.json();
       }).then(data => {
-        console.log(data);
+        console.log('current weather:', data);
 
         this.setState({
           location: {
@@ -88,6 +89,40 @@ class App extends Component {
     return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
 
+  getSearchData(search) {
+
+    function createSearchUrl(city, key) {
+      return `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${key}`;
+    }
+
+    let url = createSearchUrl(search, process.env.REACT_APP_API_KEY);
+
+    fetch(url)
+      .then(results => {
+        if (results.status !== 200) {
+          console.log(`There was a problem. Status code: ${results.status}`)
+        } 
+         return results.json();
+      }).then(data => {
+        console.log('search:', data);
+
+        this.setState({
+          location: {
+            ...this.state.location,
+            city: data.name,
+            country: data.sys.country
+          },
+          weather: {
+            description: data.weather[0].description,
+            temperature: data.main.temp,
+            icon: data.weather[0].icon
+          },
+          date: data.dt,
+          isLoading: false
+        });
+      }).catch(err => console.log(err));
+  }
+
   createForecastUrl(latitude, longitude, key) {
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
@@ -103,6 +138,7 @@ class App extends Component {
       case 'scattered clouds':
         document.body.className = 'scattered';
         break;
+      case 'overcast clouds':
       case 'broken clouds':
         document.body.className = 'broken';
         break;
@@ -143,15 +179,20 @@ class App extends Component {
   }
 
   render() {
-    return this.state.isLoading 
-    ? (<div>Loading...</div>) 
-    : (
+    // return this.state.isLoading 
+    // ? (<div><i className="fa fa-spinner fa-spin"></i> Loading...</div>) 
+    // : (
+      return(
       <div className="App">
-      <SearchBar className="searchbar"/>
-      <h2>{this.state.location.city}, {this.state.location.country}</h2>
-        <DayCard
-          weather={this.state.weather}
-          date={this.state.date}/>
+      <SearchBar 
+        className="searchbar" 
+        parentCallback={this.getSearchData}/>
+
+      <h2>{this.state.location.city}</h2>
+
+      <DayCard 
+        weather={this.state.weather} 
+        date={this.state.date}/>
       </div>
     );
   }

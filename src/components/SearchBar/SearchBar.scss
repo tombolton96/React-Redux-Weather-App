@@ -6,14 +6,32 @@
 button {
     border-radius: 200px;
     line-height: 3em;
-    border: none;
+    border: 1px outset rgba(255,255,255, 0.5);
+    //box-shadow: 0 0 10px #333;
+    color: #fff;
     padding: 6px;
     margin-left: 2px;
+    background: rgba(255,255,255, 0.5);
+    cursor: pointer;
+    outline: none;
+
+    &:active {
+        border: 1px inset rgba(255,255,255, 0.5);
+    }
 }
 
 input {
     border-radius: 50px;
-    border: none;
+    outline: none;
+    border: 1px solid #fff;;
+    // box-shadow:0 0 10px #333;
     padding: 5px;
     margin-right: 2px;
+    //background: rgba(255,255,255, 0.5);
+    background: none;
+    color: #fff;
+
+    &::placeholder {
+        color: #fff;
+    }
 }
