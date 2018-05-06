@@ -91,13 +91,14 @@ class App extends Component {
     return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
 
-  getSearchData(search) {
+  getSearchData(city, country) {
 
-    function createSearchUrl(city, key) {
-      return `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${key}`;
+    function createSearchUrl(city, country, key) {
+      return country ? `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&APPID=${key}` 
+        : `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${key}`;
     }
 
-    let url = createSearchUrl(search, process.env.REACT_APP_API_KEY);
+    let url = createSearchUrl(city, country, process.env.REACT_APP_API_KEY);
 
     fetch(url)
       .then(results => {
@@ -192,7 +193,7 @@ class App extends Component {
         className="searchbar" 
         parentCallback={this.getSearchData}/>
 
-      <h2>{this.state.location.city}</h2>
+        <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
 
       <DayCard 
         weather={this.state.weather} 
