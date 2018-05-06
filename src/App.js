@@ -26,8 +26,7 @@ class App extends Component {
         temperature: 0,
         icon: ''
       },
-      date: '',
-      isLoading: true
+      date: ''
     };
   }
 
@@ -67,7 +66,6 @@ class App extends Component {
         } 
          return results.json();
       }).then(data => {
-        console.log('current weather:', data);
 
         this.setState({
           location: {
@@ -81,8 +79,7 @@ class App extends Component {
             temperature: data.main.temp,
             icon: data.weather[0].icon
           },
-          date: data.dt,
-          isLoading: false
+          date: data.dt
         });
       }).catch(err => console.log(err));
   }
@@ -107,7 +104,6 @@ class App extends Component {
         } 
          return results.json();
       }).then(data => {
-        console.log('search:', data);
 
         this.setState({
           location: {
@@ -121,8 +117,7 @@ class App extends Component {
             temperature: data.main.temp,
             icon: data.weather[0].icon
           },
-          date: data.dt,
-          isLoading: false
+          date: data.dt
         });
       }).catch(err => console.log(err));
   }
@@ -184,22 +179,19 @@ class App extends Component {
   }
 
   render() {
-    // return this.state.isLoading 
-    // ? (<div><i className="fa fa-spinner fa-spin"></i> Loading...</div>) 
-    // : (
-      return(
+    return(
       <div className="App">
-      <SearchBar 
-        className="searchbar" 
-        parentCallback={this.getSearchData}/>
+        <SearchBar 
+          className="searchbar" 
+          parentCallback={this.getSearchData}/>
 
-        <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
+          <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
 
-      <DayCard 
-        weather={this.state.weather} 
-        date={this.state.date}/>
-      </div>
-    );
+        <DayCard 
+          weather={this.state.weather} 
+          date={this.state.date}/>
+        </div>
+      );
   }
 }
 

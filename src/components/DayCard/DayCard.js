@@ -61,13 +61,12 @@ class DayCard extends Component {
         return(
             <div className='container'>
                 <h3>{this.state.day}</h3>
-                <div className="temp">
-                    <p>{this.state.weather.temperature}&deg;C</p>
-                </div>
-                <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
-                <p className='capitalise'>{this.state.weather.description}</p>
-            </div>
-        );
+                    <div className="temp">
+                        <p>{this.state.weather.temperature}&deg;C</p>
+                    </div>
+                    <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
+                    <p className='capitalise'>{this.state.weather.description}</p>
+            </div>);
     }
 }
 
