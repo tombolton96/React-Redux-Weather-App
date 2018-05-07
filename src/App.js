@@ -76,7 +76,7 @@ class App extends Component {
           weather: {
             id: data.weather[0].id,
             description: data.weather[0].description,
-            temperature: data.main.temp,
+            temperature: Math.round(data.main.temp * 10)/10,
             icon: data.weather[0].icon
           },
           date: data.dt
@@ -114,7 +114,7 @@ class App extends Component {
           weather: {
             id: data.weather[0].id,
             description: data.weather[0].description,
-            temperature: data.main.temp,
+            temperature: Math.round(data.main.temp * 10)/10,
             icon: data.weather[0].icon
           },
           date: data.dt
@@ -186,10 +186,46 @@ class App extends Component {
           parentCallback={this.getSearchData}/>
 
           <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
+        
+        <div className="weather">
+          <div className="today">
+          <DayCard
+            weather={this.state.weather} 
+            date={this.state.date}/>
+          </div>
 
-        <DayCard 
-          weather={this.state.weather} 
-          date={this.state.date}/>
+          <DayCard
+            weather={{
+              description: 'weather',
+              temperature: 5,
+              icon: '01d'
+              }}
+              date={10000}/>
+          
+          <DayCard
+            weather={{
+              description: 'weather',
+              temperature: 5,
+              icon: '01d'
+              }}
+              date={10000}/>
+
+          <DayCard
+            weather={{
+              description: 'weather',
+              temperature: 5,
+              icon: '01d'
+              }}
+              date={10000}/>
+
+          <DayCard
+            weather={{
+              description: 'weather',
+              temperature: 5,
+              icon: '01d'
+              }}
+              date={10000}/>
+          </div>
         </div>
       );
   }

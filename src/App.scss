@@ -16,10 +16,30 @@ body {
     }
 }
 
-.searchbar {
-    margin: 5%;
-    width: 100%;
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.weather {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 5px 1%;
+    justify-content: space-evenly;
+}
+
+.today {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    padding: 0 30%;
+}
+
+/*// .searchbar {
+//     margin: 10%;
+//     width: 100%;
+// }*/
 
 .clear {
     background-image: $clearsky;
