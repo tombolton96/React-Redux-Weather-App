@@ -3,6 +3,7 @@ import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
 import SearchBar from './components/SearchBar/SearchBar';
+import Slider from './components/Carousel/Slider';
 
 class App extends Component {
   constructor() {
@@ -187,17 +188,15 @@ class App extends Component {
 
           <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
         
-        <div className="weather">
-          <div className="today">
-          <DayCard
+        <Slider>
+           <DayCard
             weather={this.state.weather} 
             date={this.state.date}/>
-          </div>
 
           <DayCard
             weather={{
               description: 'weather',
-              temperature: 5,
+              temperature: 2,
               icon: '01d'
               }}
               date={10000}/>
@@ -205,7 +204,15 @@ class App extends Component {
           <DayCard
             weather={{
               description: 'weather',
-              temperature: 5,
+              temperature: 3,
+              icon: '01d'
+              }}
+              date={10000}/>
+
+          <DayCard
+            weather={{
+              description: 'weather',
+              temperature: 4,
               icon: '01d'
               }}
               date={10000}/>
@@ -217,15 +224,7 @@ class App extends Component {
               icon: '01d'
               }}
               date={10000}/>
-
-          <DayCard
-            weather={{
-              description: 'weather',
-              temperature: 5,
-              icon: '01d'
-              }}
-              date={10000}/>
-          </div>
+        </Slider>
         </div>
       );
   }
