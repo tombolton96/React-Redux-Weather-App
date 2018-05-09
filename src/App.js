@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as locationActions from './Actions/locationActions';
 import * as weatherActions from './Actions/weatherActions';
+// import * as weatherActions from './Actions/weatherActions';
 import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
@@ -37,16 +37,16 @@ class App extends Component {
 
   componentWillMount() {
     // this.getPosition();
-    this.props.locationActions.fetchLocation();
+    this.props.weatherActions.fetchWeather();
     // this.props.weatherActions.fetchWeather(this.state.latitude, this.state.longitude);
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({
-      location: newProps.location,
-      weather: newProps.weather
-    });
-  }
+  // componentWillReceiveProps(newProps) {
+  //   this.setState({
+  //     location: newProps.location,
+  //     weather: newProps.weather
+  //   });
+  // }
 
   componentDidUpdate() {
     this.setBackground(this.state.weather.id);
@@ -245,8 +245,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    locationActions: bindActionCreators(locationActions, dispatch),
     weatherActions: bindActionCreators(weatherActions, dispatch)
+    // weatherActions: bindActionCreators(weatherActions, dispatch)
   };
 }
 

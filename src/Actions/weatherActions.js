@@ -13,14 +13,20 @@ export function receiveWeather(data) {
         date: data.dt,
         city: data.name,
         country: data.sys.country
-      };
+    };
     return {type: types.RECEIVE_WEATHER, weather: weather}
 }
 
-export function fetchWeather(lat, lon) {
+export function fetchWeather() {
     return dispatch => {
-        return fetch(url(lat, lon))
-            .then(response => response.json())
-            .then(json => dispatch(receiveWeather(json)));
+        const location = navigator.geolocation;
+        location.getCurrentPosition(position => {
+            console.log(position.coords);
+            
+            fetch(url(62, 13))
+                .then(response => response.json())
+                .then(json => dispatch(receiveWeather(json)));
+
+        }, error => console.log(error));    
     };
 }

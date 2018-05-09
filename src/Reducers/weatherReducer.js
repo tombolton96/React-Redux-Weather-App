@@ -1,7 +1,7 @@
-import initialstate from './initialState';
-import {FETCH_WEATHER, RECEIVE_WEATHER} from '../Actions/weatherActionTypes';
+import initialState from './initialState';
+import { FETCH_WEATHER, RECEIVE_WEATHER } from '../Actions/weatherActionTypes';
 
-export default function weather(state = initialstate.weather, action) {
+export default function weather(state = initialState.weather, action) {
     let newState;
     switch(action.type) {
         case FETCH_WEATHER:
