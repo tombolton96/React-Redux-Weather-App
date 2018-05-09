@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as weatherActions from './Actions/weatherActions';
-// import * as weatherActions from './Actions/weatherActions';
 import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
@@ -14,31 +13,22 @@ class App extends Component {
   constructor() {
     super();
 
-    // this.getPosition = this.getPosition.bind(this);
     this.setBackground = this.setBackground.bind(this);
     this.getSearchData = this.getSearchData.bind(this);
 
     this.state = {
-      location: {
-        latitude: undefined,
-        longitude: undefined,
-        city: '',
-        country: ''
-      },
       weather: {
         id: 0,
         description: '',
         temperature: 0,
-        icon: ''
-      },
-      date: ''
+        icon: '',
+        date: ''
+      }
     };
   }
 
   componentWillMount() {
-    // this.getPosition();
     this.props.weatherActions.fetchWeather();
-    // this.props.weatherActions.fetchWeather(this.state.latitude, this.state.longitude);
   }
 
   // componentWillReceiveProps(newProps) {
@@ -50,48 +40,6 @@ class App extends Component {
 
   componentDidUpdate() {
     this.setBackground(this.state.weather.id);
-  }
-
-  // getPosition(position) {
-  //   // let lat = position.coords.latitude,
-  //   //     lon = position.coords.longitude;
-
-  //   // this.setState({
-  //   //   location: {
-  //   //     latitude: lat,
-  //   //     longitude: lon
-  //   //   }
-  //   // });
-
-  //   let url = this.createWeatherUrl(null, null, process.env.REACT_APP_API_KEY);
-
-  //   fetch(url)
-  //     .then(results => {
-  //       if (results.status !== 200) {
-  //         console.log(`There was a problem. Status code: ${results.status}`)
-  //       } 
-  //        return results.json();
-  //     }).then(data => {
-
-  //       this.setState({
-  //         location: {
-  //           ...this.state.location,
-  //           city: data.name,
-  //           country: data.sys.country
-  //         },
-  //         weather: {
-  //           id: data.weather[0].id,
-  //           description: data.weather[0].description,
-  //           temperature: Math.round(data.main.temp * 10)/10,
-  //           icon: data.weather[0].icon
-  //         },
-  //         date: data.dt
-  //       });
-  //     }).catch(err => console.log(err));
-  // }
-
-  createWeatherUrl(latitude, longitude, key) {
-    return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
   }
 
   getSearchData(city, country) {
@@ -167,24 +115,6 @@ class App extends Component {
     }
   }
 
-  showError(error) {
-    switch(error.code) {
-      case error.PERMISSION_DENIED:
-        console.log("User denied the request for Geolocation")
-        break;
-      case error.POSITION_UNAVAILABLE:
-        console.log("Location information is unavailable")
-        break;
-      case error.TIMEOUT:
-        console.log("The request to get user location timed out")
-        break;
-      case error.UNKNOWN_ERROR:
-      default:
-        console.log("An unknown error occurred")
-        break;
-    }
-  }
-
   render() {
     return(
       <div className="App">
@@ -192,7 +122,7 @@ class App extends Component {
           className="searchbar" 
           parentCallback={this.getSearchData}/>
 
-          <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
+          {/* <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2> */}
         
         {/* <Slider>
            <DayCard
@@ -246,7 +176,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     weatherActions: bindActionCreators(weatherActions, dispatch)
-    // weatherActions: bindActionCreators(weatherActions, dispatch)
   };
 }
 

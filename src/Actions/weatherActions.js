@@ -23,7 +23,7 @@ export function fetchWeather() {
         location.getCurrentPosition(position => {
             console.log(position.coords);
             
-            fetch(url(62, 13))
+            fetch(url(position.coords.latitude, position.coords.longitude))
                 .then(response => response.json())
                 .then(json => dispatch(receiveWeather(json)));
 
