@@ -4,6 +4,7 @@ import './App.scss';
 import DayCard from './components/DayCard/DayCard';
 import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Carousel/Slider';
+import Location from './components/Location/Location';
 
 class App extends Component {
   constructor() {
@@ -32,7 +33,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getLocation();
+    //this.getLocation();
+    this.getPosition();
   }
 
   componentDidUpdate() {
@@ -48,17 +50,17 @@ class App extends Component {
   }
 
   getPosition(position) {
-    let lat = position.coords.latitude,
-        lon = position.coords.longitude;
+    // let lat = position.coords.latitude,
+    //     lon = position.coords.longitude;
 
-    this.setState({
-      location: {
-        latitude: lat,
-        longitude: lon
-      }
-    });
+    // this.setState({
+    //   location: {
+    //     latitude: lat,
+    //     longitude: lon
+    //   }
+    // });
 
-    let url = this.createWeatherUrl(lat, lon, process.env.REACT_APP_API_KEY);
+    let url = this.createWeatherUrl(60, 13, process.env.REACT_APP_API_KEY);
 
     fetch(url)
       .then(results => {
@@ -157,6 +159,7 @@ class App extends Component {
         document.body.className = 'broken';
         break;
       default:
+        document.body.className = 'dark';
         break;
     }
   }
@@ -187,7 +190,7 @@ class App extends Component {
           parentCallback={this.getSearchData}/>
 
           <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
-        
+        <Location />
         <Slider>
            <DayCard
             weather={this.state.weather} 
