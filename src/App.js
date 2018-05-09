@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as locationActions from './Actions/locationActions';
+import * as weatherActions from './Actions/weatherActions';
 import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
@@ -10,8 +14,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.getLocation = this.getLocation.bind(this);
-    this.getPosition = this.getPosition.bind(this);
+    // this.getPosition = this.getPosition.bind(this);
     this.setBackground = this.setBackground.bind(this);
     this.getSearchData = this.getSearchData.bind(this);
 
@@ -32,60 +35,60 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    //this.getLocation();
-    this.getPosition();
+  componentWillMount() {
+    // this.getPosition();
+    this.props.locationActions.fetchLocation();
+    // this.props.weatherActions.fetchWeather(this.state.latitude, this.state.longitude);
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      location: newProps.location,
+      weather: newProps.weather
+    });
   }
 
   componentDidUpdate() {
     this.setBackground(this.state.weather.id);
   }
 
-  getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.getPosition, this.showError);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
-    }
-  }
+  // getPosition(position) {
+  //   // let lat = position.coords.latitude,
+  //   //     lon = position.coords.longitude;
 
-  getPosition(position) {
-    // let lat = position.coords.latitude,
-    //     lon = position.coords.longitude;
+  //   // this.setState({
+  //   //   location: {
+  //   //     latitude: lat,
+  //   //     longitude: lon
+  //   //   }
+  //   // });
 
-    // this.setState({
-    //   location: {
-    //     latitude: lat,
-    //     longitude: lon
-    //   }
-    // });
+  //   let url = this.createWeatherUrl(null, null, process.env.REACT_APP_API_KEY);
 
-    let url = this.createWeatherUrl(60, 13, process.env.REACT_APP_API_KEY);
+  //   fetch(url)
+  //     .then(results => {
+  //       if (results.status !== 200) {
+  //         console.log(`There was a problem. Status code: ${results.status}`)
+  //       } 
+  //        return results.json();
+  //     }).then(data => {
 
-    fetch(url)
-      .then(results => {
-        if (results.status !== 200) {
-          console.log(`There was a problem. Status code: ${results.status}`)
-        } 
-         return results.json();
-      }).then(data => {
-
-        this.setState({
-          location: {
-            ...this.state.location,
-            city: data.name,
-            country: data.sys.country
-          },
-          weather: {
-            id: data.weather[0].id,
-            description: data.weather[0].description,
-            temperature: Math.round(data.main.temp * 10)/10,
-            icon: data.weather[0].icon
-          },
-          date: data.dt
-        });
-      }).catch(err => console.log(err));
-  }
+  //       this.setState({
+  //         location: {
+  //           ...this.state.location,
+  //           city: data.name,
+  //           country: data.sys.country
+  //         },
+  //         weather: {
+  //           id: data.weather[0].id,
+  //           description: data.weather[0].description,
+  //           temperature: Math.round(data.main.temp * 10)/10,
+  //           icon: data.weather[0].icon
+  //         },
+  //         date: data.dt
+  //       });
+  //     }).catch(err => console.log(err));
+  // }
 
   createWeatherUrl(latitude, longitude, key) {
     return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
@@ -190,8 +193,8 @@ class App extends Component {
           parentCallback={this.getSearchData}/>
 
           <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2>
-        <Location />
-        <Slider>
+        
+        {/* <Slider>
            <DayCard
             weather={this.state.weather} 
             date={this.state.date}/>
@@ -227,10 +230,24 @@ class App extends Component {
               icon: '01d'
               }}
               date={10000}/>
-        </Slider>
+        </Slider> */}
         </div>
       );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    location: state.location,
+    weather: state.weather
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    locationActions: bindActionCreators(locationActions, dispatch),
+    weatherActions: bindActionCreators(weatherActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

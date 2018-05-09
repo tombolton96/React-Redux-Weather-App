@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from './locationActionTypes';
 
 export function receiveLocation(position) {
     return {type: types.RECEIVE_LOCATION, location: position.coords}

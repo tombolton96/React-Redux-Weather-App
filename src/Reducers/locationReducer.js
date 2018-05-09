@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { FETCH_LOCATION, RECEIVE_LOCATION } from '../Actions/actionTypes';
+import { FETCH_LOCATION, RECEIVE_LOCATION } from '../Actions/locationActionTypes';
 
 export default function location(state = initialState.location, action) {
     let newState;
@@ -8,8 +8,11 @@ export default function location(state = initialState.location, action) {
             console.log('fetch location action');
             return action;
         case RECEIVE_LOCATION:
-            newState = action.location;
             console.log('receive location action');
+            newState = {
+                latitude: action.location.latitude,
+                longitude: action.location.longitude
+            };
             return newState;
         default:
             return state;
