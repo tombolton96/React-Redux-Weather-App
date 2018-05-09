@@ -7,14 +7,13 @@ import './App.scss';
 import DayCard from './components/DayCard/DayCard';
 import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Carousel/Slider';
-import Location from './components/Location/Location';
 
 class App extends Component {
   constructor() {
     super();
 
     this.setBackground = this.setBackground.bind(this);
-    this.getSearchData = this.getSearchData.bind(this);
+    // this.getSearchData = this.getSearchData.bind(this);
 
     this.state = {
       weather: {
@@ -31,50 +30,49 @@ class App extends Component {
     this.props.weatherActions.fetchWeather();
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   this.setState({
-  //     location: newProps.location,
-  //     weather: newProps.weather
-  //   });
-  // }
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      weather: newProps.weather
+    });
+  }
 
   componentDidUpdate() {
     this.setBackground(this.state.weather.id);
   }
 
-  getSearchData(city, country) {
+  // getSearchData(city, country) {
 
-    function createSearchUrl(city, country, key) {
-      return country ? `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&APPID=${key}` 
-        : `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${key}`;
-    }
+  //   function createSearchUrl(city, country, key) {
+  //     return country ? `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&APPID=${key}` 
+  //       : `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${key}`;
+  //   }
 
-    let url = createSearchUrl(city, country, process.env.REACT_APP_API_KEY);
+  //   let url = createSearchUrl(city, country, process.env.REACT_APP_API_KEY);
 
-    fetch(url)
-      .then(results => {
-        if (results.status !== 200) {
-          console.log(`There was a problem. Status code: ${results.status}`)
-        } 
-         return results.json();
-      }).then(data => {
+  //   fetch(url)
+  //     .then(results => {
+  //       if (results.status !== 200) {
+  //         console.log(`There was a problem. Status code: ${results.status}`)
+  //       } 
+  //        return results.json();
+  //     }).then(data => {
 
-        this.setState({
-          location: {
-            ...this.state.location,
-            city: data.name,
-            country: data.sys.country
-          },
-          weather: {
-            id: data.weather[0].id,
-            description: data.weather[0].description,
-            temperature: Math.round(data.main.temp * 10)/10,
-            icon: data.weather[0].icon
-          },
-          date: data.dt
-        });
-      }).catch(err => console.log(err));
-  }
+  //       this.setState({
+  //         location: {
+  //           ...this.state.location,
+  //           city: data.name,
+  //           country: data.sys.country
+  //         },
+  //         weather: {
+  //           id: data.weather[0].id,
+  //           description: data.weather[0].description,
+  //           temperature: Math.round(data.main.temp * 10)/10,
+  //           icon: data.weather[0].icon
+  //         },
+  //         date: data.dt
+  //       });
+  //     }).catch(err => console.log(err));
+  // }
 
   createForecastUrl(latitude, longitude, key) {
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${key}`;
@@ -120,16 +118,14 @@ class App extends Component {
       <div className="App">
         <SearchBar 
           className="searchbar" 
-          parentCallback={this.getSearchData}/>
+          parentCallback={this.props.weatherActions.search}/>
 
-          {/* <h2>{this.state.location.city} <span>{this.state.location.country}</span></h2> */}
+          <h2>{this.state.weather.city} <span>{this.state.weather.country}</span></h2>
         
-        {/* <Slider>
-           <DayCard
-            weather={this.state.weather} 
-            date={this.state.date}/>
+        {/* <Slider> */}
+           <DayCard weather={this.state.weather} />
 
-          <DayCard
+          {/* <DayCard
             weather={{
               description: 'weather',
               temperature: 2,

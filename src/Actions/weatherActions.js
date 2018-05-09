@@ -4,6 +4,11 @@ function url(lat, lon) {
     return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
 };
 
+function searchUrl(city, country) {
+    return country ? `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+        : `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
+};
+
 export function receiveWeather(data) {
     const weather = {
         id: data.weather[0].id,
@@ -21,12 +26,21 @@ export function fetchWeather() {
     return dispatch => {
         const location = navigator.geolocation;
         location.getCurrentPosition(position => {
-            console.log(position.coords);
             
             fetch(url(position.coords.latitude, position.coords.longitude))
                 .then(response => response.json())
-                .then(json => dispatch(receiveWeather(json)));
+                .then(json => dispatch(receiveWeather(json)))
+                .catch(error => console.log(error));
 
         }, error => console.log(error));    
     };
+}
+
+export function search(city, country) {
+    return dispatch => {
+        fetch(searchUrl(city, country))
+                .then(response => response.json())
+                .then(json => dispatch(receiveWeather(json)))
+                .catch(error => console.log(error));
+    }
 }

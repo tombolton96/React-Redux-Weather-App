@@ -3,7 +3,7 @@ export default {
         description: '',
         icon: '',
         temperature: undefined,
-        id: undefined,
+        id: 0,
         date: undefined,
         city: '',
         country: ''
