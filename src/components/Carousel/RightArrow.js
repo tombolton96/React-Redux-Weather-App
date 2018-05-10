@@ -4,7 +4,7 @@ import './arrow.scss';
 const RightArrow = (props) => {
   return (
     <div onClick={props.nextSlide} className="arrow">
-      <span aria-hidden="true">NEXT&#10095;</span>
+      <span aria-hidden="true">&#10095;</span>
     </div>
   );
 }
