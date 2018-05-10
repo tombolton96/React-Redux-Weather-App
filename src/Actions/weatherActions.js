@@ -32,8 +32,6 @@ export function receiveWeather(data) {
 }
 
 export function receiveForecast(data) {
-    console.log(data);
-
     const forecast = data.list.map(p => {
         return {
             date: p.dt,
@@ -43,7 +41,6 @@ export function receiveForecast(data) {
             icon: p.weather[0].icon
         };
     });
-    console.log(forecast);
     return {type: types.RECEIVE_FORECAST, forecast: forecast};
 }
 
