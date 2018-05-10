@@ -89,12 +89,12 @@ class App extends Component {
 
           <h2>{this.state.weather.city} <span>{this.state.weather.country}</span></h2>
         
-          {/* <Slider> */}
-            <DayCard weather={this.state.weather} />
+          <Slider/>
+            {/* <DayCard weather={this.state.weather} />
             <DayCard weather={this.state.forecast[0]} />
             <DayCard weather={this.state.forecast[1]} />
             <DayCard weather={this.state.forecast[2]} />
-            <DayCard weather={this.state.forecast[3]} />
+            <DayCard weather={this.state.forecast[3]} /> */}
           {/* </Slider> */}
         </div>
       );

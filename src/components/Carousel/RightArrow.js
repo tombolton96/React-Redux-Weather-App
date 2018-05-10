@@ -1,10 +1,10 @@
-
 import React, { Component } from 'react';
+import './arrow.scss';
 
 const RightArrow = (props) => {
   return (
-    <div onClick={props.nextSlide} className="nextArrow">
-      <i aria-hidden="true">&#10095;</i>
+    <div onClick={props.nextSlide} className="arrow">
+      <span aria-hidden="true">NEXT&#10095;</span>
     </div>
   );
 }
