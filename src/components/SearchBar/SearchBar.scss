@@ -6,25 +6,11 @@
     align-items: center;
 }
 
-/*
-// @media only screen and (max-width: 410px) {
-//     .searchbar {
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: space-around;
-//     }
-
-//     input, button {
-//         width: 100%;
-//         margin-top: 5px; 
-//     }
-// }*/
-
 button {
     border-radius: 100%;
-    line-height: 2.8em;
-    height: 2.8em;
-    width: 2.8em;
+    line-height: 2em;
+    height: 2em;
+    width: 2em;
     border: 1px outset rgba(255,255,255, 0.5);
     color: #fff;
     padding: 6px;
@@ -47,7 +33,7 @@ input {
     background: none;
     color: #fff;
     font-family: inherit;
-    font-size: 1.5em;
+    font-size: 1.25em;
     width: 35%;
 
     &::placeholder {

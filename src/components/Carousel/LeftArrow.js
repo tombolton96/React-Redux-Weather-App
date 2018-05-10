@@ -4,7 +4,7 @@ import './arrow.scss';
 const LeftArrow = (props) => {
   return (
     <div onClick={props.previousSlide} className="arrow">
-      <span aria-hidden="true">&#10094;</span>
+      <span aria-hidden="true">&#9666;</span>
     </div>
   );
 }

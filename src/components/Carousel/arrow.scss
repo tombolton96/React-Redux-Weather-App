@@ -1,6 +1,12 @@
 .arrow {
     margin: 10px;
     cursor: pointer;
-    font-size: 2.5em;
+    font-size: 4em;
     font-family: Raleway, sans-serif;
+    color: rgba(200,200,200, 0.6);
+    text-shadow: 0px 0px 20px #333;
+
+    &:active {
+        color: rgba(200,200,200, 1);
+    }
 }

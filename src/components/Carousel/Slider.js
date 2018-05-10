@@ -17,27 +17,27 @@ class Slider extends Component {
 
   next() {
       this.state.count === 4
-      ? this.setState({...this.state})
-      : this.setState({ 
-        ...this.state,  
-        count: (5 + this.state.count + 1) % 5
-    });
+        ? this.setState({...this.state})
+        : this.setState({ 
+            ...this.state,  
+            count: (5 + this.state.count + 1) % 5
+        });
   }
 
   prev() {
     this.state.count === 0 
-    ? this.setState({...this.state})
-    : this.setState({ 
-        ...this.state,
-        count: this.state.count - 1
-    });
+        ? this.setState({...this.state})
+        : this.setState({ 
+            ...this.state,
+            count: this.state.count - 1
+        });
   }
 
   render() {
     return this.state.isLoading ? (<div>Loading...</div>) : (
         <div className="wrapper">
             <div style={this.state.count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}><LeftArrow previousSlide={this.prev} /></div>
-            <div className="slider"  >
+            <div className="slider" >
                 <div style={this.state.count === 0 ? {display: 'flex'} : {display:'none'}}>{this.props.children[0]}</div>
                 <div style={this.state.count === 1 ? {display: 'flex'} : {display:'none'}}>{this.props.children[1]}</div>
                 <div style={this.state.count === 2 ? {display: 'flex'} : {display:'none'}}>{this.props.children[2]}</div>
