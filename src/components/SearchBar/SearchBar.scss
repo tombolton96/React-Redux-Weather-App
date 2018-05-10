@@ -1,7 +1,7 @@
 .searchbar {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 8%;
     align-items: center;
 }
@@ -21,8 +21,10 @@
 // }*/
 
 button {
-    border-radius: 200px;
-    line-height: 3em;
+    border-radius: 100%;
+    line-height: 2.8em;
+    height: 2.8em;
+    width: 2.8em;
     border: 1px outset rgba(255,255,255, 0.5);
     color: #fff;
     padding: 6px;
@@ -45,6 +47,8 @@ input {
     background: none;
     color: #fff;
     font-family: inherit;
+    font-size: 1.5em;
+    width: 35%;
 
     &::placeholder {
         color: #fff;
