@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import DayCard from '../DayCard/DayCard';
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
 

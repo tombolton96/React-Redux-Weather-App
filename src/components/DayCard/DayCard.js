@@ -17,7 +17,7 @@ class DayCard extends Component {
     componentWillReceiveProps(newProps) {
         this.setState({
             description: newProps.weather.description,
-            temperature: newProps.weather.temperature,
+            temperature: Math.round(newProps.weather.temperature * 10)/10,
             icon: newProps.weather.icon,
             day: this.getDay(newProps.weather.date)
         });
@@ -25,7 +25,6 @@ class DayCard extends Component {
 
     getDay(ms) {
         const day = new Date(ms * 1000).getDay();
-
         switch(day) {
             case 0:
                 return 'Sunday';
