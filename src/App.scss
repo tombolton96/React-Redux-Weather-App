@@ -16,10 +16,17 @@ body {
     }
 }
 
-.searchbar {
-    margin: 5%;
-    width: 100%;
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
+
+/*// .searchbar {
+//     margin: 10%;
+//     width: 100%;
+// }*/
 
 .clear {
     background-image: $clearsky;
@@ -52,4 +59,8 @@ body {
 
 .broken {
     background-image: $broken;
+}
+
+.dark {
+    background-color: #000;
 }

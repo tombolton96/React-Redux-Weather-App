@@ -7,29 +7,24 @@ class DayCard extends Component {
         super(props);
 
         this.state = {
-            weather: {
                 description: '',
                 temperature: undefined,
-                icon: ''
-            },
-            day: ''
+                icon: '',
+                day: ''
         };
     }
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            weather: {
-                description: newProps.weather.description,
-                temperature: newProps.weather.temperature,
-                icon: newProps.weather.icon
-            },
-            day: this.getDay(newProps.date)
+            description: newProps.weather.description,
+            temperature: Math.round(newProps.weather.temperature * 10)/10,
+            icon: newProps.weather.icon,
+            day: this.getDay(newProps.weather.date)
         });
     }
 
     getDay(ms) {
         const day = new Date(ms * 1000).getDay();
-
         switch(day) {
             case 0:
                 return 'Sunday';
@@ -62,10 +57,10 @@ class DayCard extends Component {
             <div className='container'>
                 <h3>{this.state.day}</h3>
                     <div className="temp">
-                        <p>{this.state.weather.temperature}&deg;C</p>
+                        <p>{this.state.temperature}&deg;C</p>
                     </div>
-                    <img src={`https://openweathermap.org/img/w/${this.state.weather.icon}.png`} alt={this.state.weather.description}/>
-                    <p className='capitalise'>{this.state.weather.description}</p>
+                    <img src={`https://openweathermap.org/img/w/${this.state.icon}.png`} alt={this.state.description}/>
+                    <p className='capitalise'>{this.state.description}</p>
             </div>);
     }
 }
