@@ -5,14 +5,13 @@ import * as weatherActions from './Actions/weatherActions';
 import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
+import IntraDayTable from './components/IntraDayTable/IntraDayTable';
 import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Carousel/Slider';
 
 class App extends Component {
   constructor() {
     super();
-
-    this.setBackground = this.setBackground.bind(this);
 
     this.state = {
       weather: {},
@@ -28,7 +27,7 @@ class App extends Component {
   componentWillReceiveProps(newProps) {
     this.setState({
       weather: newProps.weather,
-      forecast: this.getDays(newProps.forecast),
+      forecast: newProps.forecast,
       isLoading: false
     });
   }
@@ -81,21 +80,26 @@ class App extends Component {
   }
 
   render() {
-    return this.state.isLoading? (<div>Loading...</div>) : (
+    const { weather, forecast, isLoading } = this.state,
+          { weatherActions } = this.props;
+
+    return isLoading ? (<div>Loading...</div>) : (
       <div className="App">
         <SearchBar 
           className="searchbar" 
-          parentCallback={this.props.weatherActions.search}/>
+          parentCallback={weatherActions.search}/>
 
-          <h2>{this.state.weather.city} <span>{this.state.weather.country}</span></h2>
+          <h2>{weather.city} <span>{weather.country}</span></h2>
         
           <Slider>
-            <DayCard weather={this.state.weather} />
-            <DayCard weather={this.state.forecast[0]} />
-            <DayCard weather={this.state.forecast[1]} />
-            <DayCard weather={this.state.forecast[2]} />
-            <DayCard weather={this.state.forecast[3]} />
+            <DayCard weather={weather} />
+            <DayCard weather={this.getDays(forecast)[0]} />
+            <DayCard weather={this.getDays(forecast)[1]} />
+            <DayCard weather={this.getDays(forecast)[2]} />
+            <DayCard weather={this.getDays(forecast)[3]} />
           </Slider>
+
+          <IntraDayTable data={forecast}/>
         </div>
       );
   }

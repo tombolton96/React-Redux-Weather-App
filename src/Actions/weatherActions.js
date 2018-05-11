@@ -1,21 +1,23 @@
 import * as types from './weatherActionTypes';
 
+const key = process.env.REACT_APP_API_KEY;
+
 function url(lat, lon) {
-    return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${key}`;
 };
 
 function searchUrl(city, country) {
-    return country ? `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
-        : `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
+    return country ? `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&APPID=${key}`
+        : `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${key}`;
 };
 
 function forecastUrl(lat, lon) {
-    return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
+    return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&APPID=${key}`;
 };
 
 function searchForecastUrl(city, country) {
-    return country ? `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
-        : `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`; 
+    return country ? `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&APPID=${key}`
+        : `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${key}`; 
 };
 
 export function receiveWeather(data) {
