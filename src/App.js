@@ -69,6 +69,18 @@ class App extends Component {
     }
   }
 
+  getDayData(intraDayData) {
+    const today = new Date().getDay();
+    const days = [];
+
+    for(let i=0; i<5; i++) {
+        days[i] = intraDayData.filter(item => {
+            return new Date(item.date * 1000).getDay() === (7 + today + i)%7;
+        });
+    }
+    return days;
+  }
+
   getDays(forecasts) {
     const midday = '12:00:00';
     const today = new Date().getDay();
@@ -82,6 +94,8 @@ class App extends Component {
   render() {
     const { weather, forecast, isLoading } = this.state,
           { weatherActions } = this.props;
+    const intraDay = this.getDayData(forecast);
+    
 
     return isLoading ? (<div>Loading...</div>) : (
       <div className="App">
@@ -91,7 +105,7 @@ class App extends Component {
 
           <h2>{weather.city} <span>{weather.country}</span></h2>
         
-          <Slider>
+          <Slider arrows={true}>
             <DayCard weather={weather} />
             <DayCard weather={this.getDays(forecast)[0]} />
             <DayCard weather={this.getDays(forecast)[1]} />
@@ -99,7 +113,13 @@ class App extends Component {
             <DayCard weather={this.getDays(forecast)[3]} />
           </Slider>
 
-          <IntraDayTable data={forecast}/>
+          <Slider arrows={false}>
+            <IntraDayTable data={intraDay[0]}/>
+            <IntraDayTable data={intraDay[1]}/>
+            <IntraDayTable data={intraDay[2]}/>
+            <IntraDayTable data={intraDay[3]}/>
+            <IntraDayTable data={intraDay[4]}/>              
+          </Slider>
         </div>
       );
   }

@@ -24,7 +24,7 @@ export function receiveWeather(data) {
     const weather = {
         id: data.weather[0].id,
         description: data.weather[0].description,
-        temperature: data.main.temp,
+        temperature: Math.round(data.main.temp*10)/10,
         icon: data.weather[0].icon,
         date: data.dt,
         city: data.name,
@@ -38,7 +38,7 @@ export function receiveForecast(data) {
         return {
             date: p.dt,
             datestring: p.dt_txt,
-            temperature: p.main.temp,
+            temperature: Math.round(p.main.temp*10)/10,
             description: p.weather[0].description,
             icon: p.weather[0].icon
         };

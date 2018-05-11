@@ -5,59 +5,43 @@ class IntraDayTable extends Component {
     constructor() {
         super();
 
+        this.getRows = this.getRows.bind(this);
+
         this.state = {
-            today: [],
-            secondDay: [],
-            thirdDay: [],
-            fourthDay: [],
-            fifthDay: []
+            data: []
         };
     }
 
     componentWillReceiveProps(newProps) {
-        const dayData = this.getDayData(newProps.data); 
-        this.setState({
-            today: dayData[0],
-            secondDay: dayData[1],
-            thirdDay: dayData[2],
-            fourthDay: dayData[3],
-            fifthDay: dayData[4]
+        this.setState({data: newProps.data});
+    }
+
+    getRows(intraDayArray) {
+        return intraDayArray.map((obj, i) => {
+            const time = new Date(obj.date*1000).toLocaleTimeString();
+
+            return(
+                <tr key={i}>
+                    <td>{time.substring(0, time.length-3)}</td>
+                    <td>{obj.temperature}&deg;C</td>
+                    <td className='capitalise'><span>{obj.description}</span><img src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
+                </tr>
+            );
         });
     }
 
-    getDayData(intraDayData) {
-        const today = new Date().getDay();
-        const days = [];
-
-        for(let i=0; i<5; i++) {
-            days[i] = intraDayData.filter(item => {
-                return new Date(item.date * 1000).getDay() === (7 + today + i)%7;
-            });
-        }
-        return days;
-    }
-
     render() {
-        return(
-            <div className="tablewrapper">
+        const { data } = this.state;
+
+        return data.length ? (
+            <div className="tablewrapper container">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Temp.</th>
-                            <th>Weather</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        <tr>
-                            <td>12:00</td>
-                            <td>12&deg;C</td>
-                            <td>Clear Sky</td>
-                        </tr>
+                    <tbody>
+                        {this.getRows(data)}    
                     </tbody>
                 </table>
             </div>
-        );
+        ) : <div>Loading...</div>;
     }
 }
 

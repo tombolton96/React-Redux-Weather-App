@@ -11,7 +11,8 @@ class Slider extends Component {
     this.prev = this.prev.bind(this);
 
     this.state = {
-        count: 0
+        count: 0,
+        arrows: props.arrows
     };
   }
 
@@ -34,17 +35,26 @@ class Slider extends Component {
   }
 
   render() {
-    return this.state.isLoading ? (<div>Loading...</div>) : (
-        <div className="wrapper">
-            <div style={this.state.count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}><LeftArrow previousSlide={this.prev} /></div>
-            <div className="slider" >
-                <div style={this.state.count === 0 ? {display: 'flex'} : {display:'none'}}>{this.props.children[0]}</div>
-                <div style={this.state.count === 1 ? {display: 'flex'} : {display:'none'}}>{this.props.children[1]}</div>
-                <div style={this.state.count === 2 ? {display: 'flex'} : {display:'none'}}>{this.props.children[2]}</div>
-                <div style={this.state.count === 3 ? {display: 'flex'} : {display:'none'}}>{this.props.children[3]}</div>
-                <div style={this.state.count === 4 ? {display: 'flex'} : {display:'none'}}>{this.props.children[4]}</div>    
+    const { count, arrows, isLoading } = this.state,
+        { children } = this.props;
+
+    return isLoading ? (<div>Loading...</div>) : (
+        <div className="outer">
+            <div style={count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'} 
+                && arrows === false ? {display: 'none'} : {display: 'initial'}}>
+                <LeftArrow previousSlide={this.prev} />
             </div>
-            <div style={this.state.count === 4 ? {visibility: 'hidden'} : {visibility: 'visible'}}><RightArrow nextSlide={this.next} /></div>
+            <div className="slider" >
+                <div style={count === 0 ? {display: 'flex'} : {display:'none'}}>{children[0]}</div>
+                <div style={count === 1 ? {display: 'flex'} : {display:'none'}}>{children[1]}</div>
+                <div style={count === 2 ? {display: 'flex'} : {display:'none'}}>{children[2]}</div>
+                <div style={count === 3 ? {display: 'flex'} : {display:'none'}}>{children[3]}</div>
+                <div style={count === 4 ? {display: 'flex'} : {display:'none'}}>{children[4]}</div>    
+            </div>
+            <div style={count === 4 ? {visibility: 'hidden'} : {visibility: 'visible'}
+                && arrows === false ? {display: 'none'} : {display: 'initial'}}>
+                <RightArrow nextSlide={this.next} />
+            </div>
         </div>
     );
   }

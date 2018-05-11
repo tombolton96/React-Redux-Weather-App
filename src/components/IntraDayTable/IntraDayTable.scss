@@ -1,8 +1,29 @@
 .tablewrapper {
-    margin: 30px;
+    margin: 30px 10px;
+    width: 100%;
 
-    th, td {
-        width: 33%;
-        text-align: left;
+    table {
+        border-collapse: collapse;
+        width: 100%;
+
+        td {
+            width: 30%;
+            text-align: left;
+            border-bottom: 1px solid rgba(190,190,190,0.3);
+
+            span {
+                vertical-align: baseline    
+            }
+        }
+
+        img {
+            width: 30px;
+            height: 30px;
+            vertical-align: baseline;
+        }
     }
+}
+
+.capitalise:first-letter {
+    text-transform: capitalize;
 }
