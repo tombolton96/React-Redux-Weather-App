@@ -2,21 +2,22 @@
     margin: 5%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
 
     table {
         border-collapse: collapse;
         width: 100%;
+        
+        tr {
+            width: 100%;
+        }
 
         td {
             width: 20%;
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.3);
         }
-
-        /*.description {
-            width: 25%;
-        }*/
 
         img {
             width: 30px;

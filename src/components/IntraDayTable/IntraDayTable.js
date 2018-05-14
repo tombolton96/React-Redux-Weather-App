@@ -22,10 +22,8 @@ class IntraDayTable extends Component {
 
             return(
                 <tr key={i}>
-                    <td>{time.substring(0, time.length-3)}</td>
-                    <td> </td>
-                    <td>{obj.temperature}&deg;C</td>
-                    <td> </td>
+                    <td className='time'>{time.substring(0, time.length-3)}</td>
+                    <td className='temperature'>{obj.temperature}&deg;C</td>
                     <td className='capitalise description'>{obj.description}</td>
                     <td><img src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
                 </tr>
@@ -44,7 +42,7 @@ class IntraDayTable extends Component {
                     </tbody>
                 </table>
             </div>
-        ) : <div>There is currently no intra-day data to display</div>;
+        ) : <div>There is currently no intra-day data to display for this day</div>;
     }
 }
 
