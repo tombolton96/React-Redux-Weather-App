@@ -1,26 +1,33 @@
 .tablewrapper {
-    margin: 30px 10px;
+    margin: 5%;
     width: 100%;
+    display: flex;
+    justify-content: center;
 
     table {
         border-collapse: collapse;
         width: 100%;
 
         td {
-            width: 30%;
-            text-align: left;
-            border-bottom: 1px solid rgba(190,190,190,0.3);
+            width: 12%;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
 
-            span {
-                vertical-align: baseline    
-            }
+        .description {
+            //width: 25%;
         }
 
         img {
             width: 30px;
             height: 30px;
-            vertical-align: baseline;
         }
+
+       /* // @media only screen and(max-width: 430px) {
+        //     img {
+        //         display: none;
+        //     }
+        // }*/
     }
 }
 

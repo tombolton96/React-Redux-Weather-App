@@ -20,14 +20,9 @@ body {
 .App {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
-
-/*// .searchbar {
-//     margin: 10%;
-//     width: 100%;
-// }*/
 
 .clear {
     background-image: $clearsky;

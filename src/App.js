@@ -99,9 +99,7 @@ class App extends Component {
 
     return isLoading ? (<div>Loading...</div>) : (
       <div className="App">
-        <SearchBar 
-          className="searchbar" 
-          parentCallback={weatherActions.search}/>
+        <SearchBar parentCallback={weatherActions.search}/>
 
           <h2>{weather.city} <span>{weather.country}</span></h2>
         
