@@ -21,19 +21,17 @@ class Slider extends Component {
 
     return isLoading ? (<div>Loading...</div>) : (
         <div className="outer">
-            <div style={count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'} 
-                && arrows === false ? {visibility: 'hidden'} : {visibility: 'visible'}}>
+            <div style={count === 0 || arrows === false ? {visibility: 'hidden'} : {visibility: 'visible'}}>
                 <LeftArrow previousSlide={this.props.sliderActions.prevSlide} />
             </div>
-            <div className="slider" >
+            <div className="slider container" >
                 <div style={count === 0 ? {display: 'flex'} : {display:'none'}}>{children[0]}</div>
                 <div style={count === 1 ? {display: 'flex'} : {display:'none'}}>{children[1]}</div>
                 <div style={count === 2 ? {display: 'flex'} : {display:'none'}}>{children[2]}</div>
                 <div style={count === 3 ? {display: 'flex'} : {display:'none'}}>{children[3]}</div>
                 <div style={count === 4 ? {display: 'flex'} : {display:'none'}}>{children[4]}</div>    
             </div>
-            <div style={count === 4 ? {visibility: 'hidden'} : {visibility: 'visible'}
-                && arrows === false ? {visibility: 'hidden'} : {visibility: 'visible'}}>
+            <div style={count === 4 || arrows === false ? {visibility: 'hidden'} : {visibility: 'visible'}}>
                 <RightArrow nextSlide={this.props.sliderActions.nextSlide} />
             </div>
         </div>

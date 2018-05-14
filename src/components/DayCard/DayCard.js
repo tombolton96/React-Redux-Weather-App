@@ -54,7 +54,7 @@ class DayCard extends Component {
 
     render() {
         return(
-            <div className='container'>
+            <div className='daycard'>
                 <h3>{this.state.day}</h3>
                     <div className="temp">
                         <p>{this.state.temperature}&deg;C</p>

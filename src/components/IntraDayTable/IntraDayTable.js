@@ -22,14 +22,12 @@ class IntraDayTable extends Component {
 
             return(
                 <tr key={i}>
-                    <td> </td>
                     <td>{time.substring(0, time.length-3)}</td>
                     <td> </td>
                     <td>{obj.temperature}&deg;C</td>
                     <td> </td>
                     <td className='capitalise description'>{obj.description}</td>
                     <td><img src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
-                    <td> </td>
                 </tr>
             );
         });
@@ -39,14 +37,14 @@ class IntraDayTable extends Component {
         const { data } = this.state;
 
         return data.length ? (
-            <div className="tablewrapper container">
+            <div className="tablewrapper">
                 <table>
                     <tbody>
                         {this.getRows(data)}    
                     </tbody>
                 </table>
             </div>
-        ) : <div>Loading...</div>;
+        ) : <div>There is currently no intra-day data to display</div>;
     }
 }
 
