@@ -43,10 +43,12 @@ class SearchBar extends Component {
     }
 
     render() {
+        const {city, country} = this.state;
+
         return(
             <div className="searchbar">
-                <input placeholder="City" value={this.state.city} onChange={this.getCityName} />
-                <input placeholder="Country" value={this.state.country} onChange={this.getCountryName} />
+                <input placeholder="City" value={city} onChange={this.getCityName} />
+                <input placeholder="Country" value={country} onChange={this.getCountryName} />
                 <button className="fa fa-search" onClick={this.sendSearchToParent} ></button>
             </div>
         );

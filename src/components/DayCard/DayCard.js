@@ -17,7 +17,7 @@ class DayCard extends Component {
     componentWillReceiveProps(newProps) {
         this.setState({
             description: newProps.weather.description,
-            temperature: Math.round(newProps.weather.temperature * 10)/10,
+            temperature: newProps.weather.temperature,
             icon: newProps.weather.icon,
             day: this.getDay(newProps.weather.date)
         });
@@ -54,7 +54,7 @@ class DayCard extends Component {
 
     render() {
         return(
-            <div className='container'>
+            <div className='daycard'>
                 <h3>{this.state.day}</h3>
                     <div className="temp">
                         <p>{this.state.temperature}&deg;C</p>

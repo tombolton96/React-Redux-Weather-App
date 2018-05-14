@@ -1,4 +1,5 @@
 export default {
     weather: {},
-    forecast: []
+    forecast: [],
+    sliderCount: 0
 }

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect }from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as sliderActions from '../../Actions/sliderActions';
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
 import './slider.scss'; 
@@ -7,47 +10,45 @@ class Slider extends Component {
   constructor(props) {
     super(props);
 
-    this.next = this.next.bind(this);
-    this.prev = this.prev.bind(this);
-
     this.state = {
-        count: 0
+        arrows: props.arrows
     };
   }
 
-  next() {
-      this.state.count === 4
-        ? this.setState({...this.state})
-        : this.setState({ 
-            ...this.state,  
-            count: (5 + this.state.count + 1) % 5
-        });
-  }
-
-  prev() {
-    this.state.count === 0 
-        ? this.setState({...this.state})
-        : this.setState({ 
-            ...this.state,
-            count: this.state.count - 1
-        });
-  }
-
   render() {
-    return this.state.isLoading ? (<div>Loading...</div>) : (
-        <div className="wrapper">
-            <div style={this.state.count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}><LeftArrow previousSlide={this.prev} /></div>
-            <div className="slider" >
-                <div style={this.state.count === 0 ? {display: 'flex'} : {display:'none'}}>{this.props.children[0]}</div>
-                <div style={this.state.count === 1 ? {display: 'flex'} : {display:'none'}}>{this.props.children[1]}</div>
-                <div style={this.state.count === 2 ? {display: 'flex'} : {display:'none'}}>{this.props.children[2]}</div>
-                <div style={this.state.count === 3 ? {display: 'flex'} : {display:'none'}}>{this.props.children[3]}</div>
-                <div style={this.state.count === 4 ? {display: 'flex'} : {display:'none'}}>{this.props.children[4]}</div>    
+    const { arrows, isLoading } = this.state,
+        { children, count } = this.props;
+
+    return isLoading ? (<div>Loading...</div>) : (
+        <div className="outer">
+            <div style={count === 0 || arrows === false ? {visibility: 'hidden'} : {visibility: 'visible'}}>
+                <LeftArrow previousSlide={this.props.sliderActions.prevSlide} />
             </div>
-            <div style={this.state.count === 4 ? {visibility: 'hidden'} : {visibility: 'visible'}}><RightArrow nextSlide={this.next} /></div>
+            <div className="slider container" >
+                <div style={count === 0 ? {display: 'flex'} : {display:'none'}}>{children[0]}</div>
+                <div style={count === 1 ? {display: 'flex'} : {display:'none'}}>{children[1]}</div>
+                <div style={count === 2 ? {display: 'flex'} : {display:'none'}}>{children[2]}</div>
+                <div style={count === 3 ? {display: 'flex'} : {display:'none'}}>{children[3]}</div>
+                <div style={count === 4 ? {display: 'flex'} : {display:'none'}}>{children[4]}</div>    
+            </div>
+            <div style={count === 4 || arrows === false ? {visibility: 'hidden'} : {visibility: 'visible'}}>
+                <RightArrow nextSlide={this.props.sliderActions.nextSlide} />
+            </div>
         </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+    return {
+        count: state.sliderCount
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        sliderActions: bindActionCreators(sliderActions, dispatch)
+    };
+}
   
-export default Slider;
+export default connect(mapStateToProps, mapDispatchToProps)(Slider);

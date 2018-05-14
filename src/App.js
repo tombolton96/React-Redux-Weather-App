@@ -5,14 +5,13 @@ import * as weatherActions from './Actions/weatherActions';
 import './index.scss';
 import './App.scss';
 import DayCard from './components/DayCard/DayCard';
+import IntraDayTable from './components/IntraDayTable/IntraDayTable';
 import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Carousel/Slider';
 
 class App extends Component {
   constructor() {
     super();
-
-    this.setBackground = this.setBackground.bind(this);
 
     this.state = {
       weather: {},
@@ -28,7 +27,7 @@ class App extends Component {
   componentWillReceiveProps(newProps) {
     this.setState({
       weather: newProps.weather,
-      forecast: this.getDays(newProps.forecast),
+      forecast: newProps.forecast,
       isLoading: false
     });
   }
@@ -70,6 +69,18 @@ class App extends Component {
     }
   }
 
+  getDayData(intraDayData) {
+    const today = new Date().getDay();
+    const days = [];
+
+    for(let i=0; i<5; i++) {
+        days[i] = intraDayData.filter(item => {
+            return new Date(item.date * 1000).getDay() === (7 + today + i)%7;
+        });
+    }
+    return days;
+  }
+
   getDays(forecasts) {
     const midday = '12:00:00';
     const today = new Date().getDay();
@@ -81,20 +92,31 @@ class App extends Component {
   }
 
   render() {
-    return this.state.isLoading? (<div>Loading...</div>) : (
-      <div className="App">
-        <SearchBar 
-          className="searchbar" 
-          parentCallback={this.props.weatherActions.search}/>
+    const { weather, forecast, isLoading } = this.state,
+          { weatherActions } = this.props;
+    const intraDay = this.getDayData(forecast);
+    
 
-          <h2>{this.state.weather.city} <span>{this.state.weather.country}</span></h2>
+    return isLoading ? (<div>Loading...</div>) : (
+      <div className="App">
+        <SearchBar parentCallback={weatherActions.search}/>
+
+          <h2>{weather.city} <span>{weather.country}</span></h2>
         
-          <Slider>
-            <DayCard weather={this.state.weather} />
-            <DayCard weather={this.state.forecast[0]} />
-            <DayCard weather={this.state.forecast[1]} />
-            <DayCard weather={this.state.forecast[2]} />
-            <DayCard weather={this.state.forecast[3]} />
+          <Slider arrows={true}>
+            <DayCard weather={weather} />
+            <DayCard weather={this.getDays(forecast)[0]} />
+            <DayCard weather={this.getDays(forecast)[1]} />
+            <DayCard weather={this.getDays(forecast)[2]} />
+            <DayCard weather={this.getDays(forecast)[3]} />
+          </Slider>
+
+          <Slider arrows={false}>
+            <IntraDayTable data={intraDay[0]}/>
+            <IntraDayTable data={intraDay[1]}/>
+            <IntraDayTable data={intraDay[2]}/>
+            <IntraDayTable data={intraDay[3]}/>
+            <IntraDayTable data={intraDay[4]}/>              
           </Slider>
         </div>
       );
