@@ -53,7 +53,7 @@ class DayCard extends Component {
     }
 
     render() {
-        return(
+        return this.state.temperature ? (
             <div className='daycard'>
                 <h3>{this.state.day}</h3>
                     <div className="temp">
@@ -61,7 +61,7 @@ class DayCard extends Component {
                     </div>
                     <img src={`https://openweathermap.org/img/w/${this.state.icon}.png`} alt={this.state.description}/>
                     <p className='capitalise'>{this.state.description}</p>
-            </div>);
+            </div>) : (<div>Please Search for current location</div>);
     }
 }
 
