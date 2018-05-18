@@ -21,7 +21,7 @@ function searchForecastUrl(city, country) {
 };
 
 export function receiveWeather(data) {
-    const weather = {
+    const weather = data ? {
         id: data.weather[0].id,
         description: data.weather[0].description,
         temperature: Math.round(data.main.temp*10)/10,
@@ -29,7 +29,7 @@ export function receiveWeather(data) {
         date: data.dt,
         city: data.name,
         country: data.sys.country
-    };
+    } : {id:800};
     return {type: types.RECEIVE_WEATHER, weather: weather};
 }
 
@@ -61,7 +61,10 @@ export function fetchWeather() {
                 .then(json => dispatch(receiveForecast(json)))
                 .catch(error => console.log(error));
 
-        }, error => console.log(error));    
+        }, error => {
+             console.log(error);
+             dispatch(receiveWeather());
+        });
     };
 }
 
