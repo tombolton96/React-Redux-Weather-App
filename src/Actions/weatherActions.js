@@ -29,15 +29,7 @@ export function receiveWeather(data) {
         date: data.dt,
         city: data.name,
         country: data.sys.country
-    } : {
-        id: 800,
-        description: '-',
-        temperature: '-',
-        icon: '',
-        date: '-',
-        city: '',
-        country: ''
-    };
+    } : {id:800};
     return {type: types.RECEIVE_WEATHER, weather: weather};
 }
 

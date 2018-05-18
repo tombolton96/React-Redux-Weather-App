@@ -42,7 +42,7 @@ class IntraDayTable extends Component {
                     </tbody>
                 </table>
             </div>
-        ) : <div>There is currently no intra-day data to display for this day</div>;
+        ) : <div>There is currently no data to display for this day</div>;
     }
 }
 
