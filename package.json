@@ -1,6 +1,6 @@
 {
   "name": "weather-app",
-  "version": "0.7.1",
+  "version": "0.7.3",
   "homepage": "http://tombolton96.github.io/React-Weather-App",
   "private": true,
   "dependencies": {

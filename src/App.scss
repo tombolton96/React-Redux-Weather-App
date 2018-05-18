@@ -24,6 +24,11 @@ body {
     align-items: center;
 }
 
+.searchingContainer {
+    display: none;
+    border-radius: 5px;
+}
+
 .clear {
     background-image: $clearsky;
 }
