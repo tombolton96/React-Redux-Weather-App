@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     color: #fff;
     font-family: Raleway, sans-serif;
-    transition: background-image 2s;
+    transition: background-image 1s;
 
     h2 {
         text-align: center;
@@ -39,8 +39,20 @@ body {
 }
 
 .snow {
-    background-image: $snow;
-    color: #7ec0ee;
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+
+    &:after {
+        content: "";
+        position: absolute;
+        background-image: $snow;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        opacity: 0.5;
+    }
 }
 
 .rain {
