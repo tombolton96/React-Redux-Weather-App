@@ -8,6 +8,11 @@ body {
     color: #fff;
     font-family: Raleway, sans-serif;
     transition: background-image 1s;
+    background: rgba(0,0,0,0.25);
+
+    &:after {
+        transition: background-image 1s;
+    }
 
     h2 {
         text-align: center;
@@ -30,19 +35,31 @@ body {
     border-radius: 5px;
 }
 
-.clear {
+.clear::after {
+    content: "";
+    position: absolute;
     background-image: $clearsky;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
 }
 
-.storm {
+.storm::after {
+    content: "";
+    position: absolute;
     background-image: $storm;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
 }
 
-.snow {
-    position: relative;
-    background: rgba(0, 0, 0, 0.3);
-
-    &:after {
+.snow::after {
         content: "";
         position: absolute;
         background-image: $snow;
@@ -53,26 +70,65 @@ body {
         z-index: -1;
         opacity: 0.5;
     }
-}
 
-.rain {
+.rain::after {
+    content: "";
+    position: absolute;
     background-image: $rain;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
 }
 
-.scattered {
+.scattered::after {
+    content: "";
+    position: absolute;
     background-image: $scattered;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
 }
 
-.mist {
+.mist::after {
+    content: "";
+    position: absolute;
     background-image: $mist;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
 }
 
-.few {
+.few::after {
+    content: "";
+    position: absolute;
     background-image: $fewclouds;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
 }
 
-.broken {
+.broken::after {
+    content: "";
+    position: absolute;
     background-image: $broken;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
 }
 
 .dark {
