@@ -1,4 +1,5 @@
 import * as types from './weatherActionTypes';
+import { SEARCHING } from './searchingActionTypes';
 
 const key = process.env.REACT_APP_API_KEY;
 
@@ -21,6 +22,7 @@ function searchForecastUrl(city, country) {
 };
 
 export function receiveWeather(data) {
+
     const weather = data ? {
         id: data.weather[0].id,
         description: data.weather[0].description,
@@ -79,5 +81,11 @@ export function search(city, country) {
             .then(response => response.json())
             .then(json => dispatch(receiveForecast(json)))
             .catch(error => console.log(error));
+
+        dispatch(searching(true));
     };
+}
+
+export function searching(bool) {
+    return {type: SEARCHING, searching:bool};
 }

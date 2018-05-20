@@ -98,7 +98,7 @@ class App extends Component {
     const intraDay = this.getDayData(forecast);
     
 
-    return isLoading ? (<div>Loading...</div>) : (
+    return isLoading ? (<div className='loading'>Loading...</div>) : (
       <div className="App">
         <SearchBar parentCallback={weatherActions.search}/>
         <div className='searchingContainer'><Searching/></div>
