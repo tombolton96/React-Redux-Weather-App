@@ -12,6 +12,14 @@ body {
 
     &:after {
         transition: background-image 1s;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        opacity: 0.5;
     }
 
     h2 {
@@ -36,99 +44,35 @@ body {
 }
 
 .clear::after {
-    content: "";
-    position: absolute;
     background-image: $clearsky;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .storm::after {
-    content: "";
-    position: absolute;
     background-image: $storm;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .snow::after {
-        content: "";
-        position: absolute;
         background-image: $snow;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
-        opacity: 0.5;
     }
 
 .rain::after {
-    content: "";
-    position: absolute;
     background-image: $rain;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .scattered::after {
-    content: "";
-    position: absolute;
     background-image: $scattered;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .mist::after {
-    content: "";
-    position: absolute;
     background-image: $mist;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .few::after {
-    content: "";
-    position: absolute;
     background-image: $fewclouds;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .broken::after {
-    content: "";
-    position: absolute;
     background-image: $broken;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .dark {
