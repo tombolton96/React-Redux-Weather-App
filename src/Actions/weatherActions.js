@@ -1,4 +1,5 @@
 import * as types from './weatherActionTypes';
+import { SEARCHING } from './searchingActionTypes';
 
 const key = process.env.REACT_APP_API_KEY;
 
@@ -21,6 +22,7 @@ function searchForecastUrl(city, country) {
 };
 
 export function receiveWeather(data) {
+
     const weather = data ? {
         id: data.weather[0].id,
         description: data.weather[0].description,
@@ -30,7 +32,7 @@ export function receiveWeather(data) {
         city: data.name,
         country: data.sys.country
     } : {id:800};
-    return {type: types.RECEIVE_WEATHER, weather: weather};
+    return {type: types.RECEIVE_WEATHER, weather};
 }
 
 export function receiveForecast(data) {
@@ -43,7 +45,7 @@ export function receiveForecast(data) {
             icon: p.weather[0].icon
         };
     });
-    return {type: types.RECEIVE_FORECAST, forecast: forecast};
+    return {type: types.RECEIVE_FORECAST, forecast};
 }
 
 export function fetchWeather() {
@@ -70,6 +72,9 @@ export function fetchWeather() {
 
 export function search(city, country) {
     return dispatch => {
+
+        dispatch(searching(true));
+
         fetch(searchUrl(city, country))
             .then(response => response.json())
             .then(json => dispatch(receiveWeather(json)))
@@ -78,6 +83,11 @@ export function search(city, country) {
         fetch(searchForecastUrl(city, country))
             .then(response => response.json())
             .then(json => dispatch(receiveForecast(json)))
+            .then(() => dispatch(searching(false)))
             .catch(error => console.log(error));
     };
+}
+
+export function searching(bool) {
+    return {type: SEARCHING, searching:bool};
 }

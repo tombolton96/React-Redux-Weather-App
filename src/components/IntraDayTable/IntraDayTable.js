@@ -22,9 +22,9 @@ class IntraDayTable extends Component {
 
             return(
                 <tr key={i}>
-                    <td className='time'>{time.substring(0, time.length-3)}</td>
-                    <td className='temperature'>{obj.temperature}&deg;C</td>
-                    <td className='capitalise description'>{obj.description}</td>
+                    <td>{time.substring(0, time.length-3)}</td>
+                    <td>{obj.temperature}&deg;C</td>
+                    <td className='capitalise'>{obj.description}</td>
                     <td><img src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
                 </tr>
             );

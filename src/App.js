@@ -8,6 +8,7 @@ import DayCard from './components/DayCard/DayCard';
 import IntraDayTable from './components/IntraDayTable/IntraDayTable';
 import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Carousel/Slider';
+import Searching from './components/Searching/Searching';
 
 class App extends Component {
   constructor() {
@@ -16,7 +17,8 @@ class App extends Component {
     this.state = {
       weather: {},
       forecast: [],
-      isLoading: true
+      isLoading: true,
+      searching: false
     };
   }
 
@@ -28,7 +30,8 @@ class App extends Component {
     this.setState({
       weather: newProps.weather,
       forecast: newProps.forecast,
-      isLoading: false
+      isLoading: false,
+      searching: newProps.searching
     });
   }
 
@@ -92,15 +95,17 @@ class App extends Component {
   }
 
   render() {
-    const { weather, forecast, isLoading } = this.state,
+    const { weather, forecast, isLoading, searching } = this.state,
           { weatherActions } = this.props;
     const intraDay = this.getDayData(forecast);
     
-
-    return isLoading ? (<div>Loading...</div>) : (
-      <div className="App">
-        <SearchBar parentCallback={weatherActions.search}/>
-
+    return isLoading ? (<div className='loading'>Loading...</div>) : (
+      <div className='App'>
+        <div style={searching ? {display:'block'} : {display:'none'}} className='searchingContainer'><Searching/></div>
+        
+        <div style={searching ? {filter: 'blur(2px)'} : {}}>
+          <SearchBar parentCallback={weatherActions.search}/>
+          
           <h2>{weather.city} <span>{weather.country}</span></h2>
         
           <Slider arrows={true}>
@@ -119,6 +124,7 @@ class App extends Component {
             <IntraDayTable data={intraDay[4]}/>              
           </Slider>
         </div>
+      </div>
       );
   }
 }
@@ -126,7 +132,8 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     weather: state.weather,
-    forecast: state.forecast
+    forecast: state.forecast,
+    searching: state.searching
   };
 }
 

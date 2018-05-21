@@ -1,12 +1,14 @@
 @import './Assets/images.scss';
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     color: #fff;
     font-family: Raleway, sans-serif;
+    transition: background-image 1s;
+    background: rgba(0,0,100,0.25);
+    background-blend-mode: darken;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
 
     h2 {
         text-align: center;
@@ -22,6 +24,31 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.searchingContainer {
+    position: absolute;
+    z-index: 1;
+}
+
+@keyframes loading {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+
+.loading {
+        font-size: 1.5em;
+        opacity:1;
+        animation-name: loading;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate-reverse;
+        animation-timing-function: linear;
+        text-align: center;
+        margin: 50% 0;
 }
 
 .clear {
@@ -34,8 +61,7 @@ body {
 
 .snow {
     background-image: $snow;
-    color: #7ec0ee;
-}
+    }
 
 .rain {
     background-image: $rain;

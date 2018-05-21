@@ -3,7 +3,9 @@
     cursor: pointer;
     font-size: 4em;
     font-family: Raleway, sans-serif;
-    color: rgba(190,190,190, 0.5);
+    color: rgba(255,255,255, .6);
+    text-shadow: 0 0 5px;
+    border-radius: 50%;
 
     &:active {
         color: rgba(190,190,190, 1);
