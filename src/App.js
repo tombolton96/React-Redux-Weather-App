@@ -17,7 +17,8 @@ class App extends Component {
     this.state = {
       weather: {},
       forecast: [],
-      isLoading: true
+      isLoading: true,
+      searching: false
     };
   }
 
@@ -29,7 +30,8 @@ class App extends Component {
     this.setState({
       weather: newProps.weather,
       forecast: newProps.forecast,
-      isLoading: false
+      isLoading: false,
+      searching: newProps.searching
     });
   }
 
@@ -93,15 +95,15 @@ class App extends Component {
   }
 
   render() {
-    const { weather, forecast, isLoading } = this.state,
+    const { weather, forecast, isLoading, searching } = this.state,
           { weatherActions } = this.props;
     const intraDay = this.getDayData(forecast);
     
-
     return isLoading ? (<div className='loading'>Loading...</div>) : (
       <div className="App">
         <SearchBar parentCallback={weatherActions.search}/>
-        <div className='searchingContainer'><Searching/></div>
+
+        <div style={searching ? {display:'block'} : {display:'none'}} className='searchingContainer'><Searching/></div>
         
         <h2>{weather.city} <span>{weather.country}</span></h2>
       
@@ -128,7 +130,8 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     weather: state.weather,
-    forecast: state.forecast
+    forecast: state.forecast,
+    searching: state.searching
   };
 }
 
