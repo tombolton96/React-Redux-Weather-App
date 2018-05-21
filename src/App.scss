@@ -4,7 +4,7 @@ body {
     color: #fff;
     font-family: Raleway, sans-serif;
     transition: background-image 1s;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,100,0.25);
     background-blend-mode: darken;
     margin: 0;
     padding: 0;
@@ -30,10 +30,8 @@ body {
 }
 
 .searchingContainer {
-    // display: none;
     position: absolute;
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 5px;
+    z-index: 1;
 }
 
 @keyframes loading {

@@ -100,28 +100,30 @@ class App extends Component {
     const intraDay = this.getDayData(forecast);
     
     return isLoading ? (<div className='loading'>Loading...</div>) : (
-      <div className="App">
-        <SearchBar parentCallback={weatherActions.search}/>
-
+      <div className='App'>
         <div style={searching ? {display:'block'} : {display:'none'}} className='searchingContainer'><Searching/></div>
         
-        <h2>{weather.city} <span>{weather.country}</span></h2>
-      
-        <Slider arrows={true}>
-          <DayCard weather={weather} />
-          <DayCard weather={this.getDays(forecast)[0]} />
-          <DayCard weather={this.getDays(forecast)[1]} />
-          <DayCard weather={this.getDays(forecast)[2]} />
-          <DayCard weather={this.getDays(forecast)[3]} />
-        </Slider>
+        <div style={searching ? {filter: 'blur(2px)'} : {}}>
+          <SearchBar parentCallback={weatherActions.search}/>
+          
+          <h2>{weather.city} <span>{weather.country}</span></h2>
+        
+          <Slider arrows={true}>
+            <DayCard weather={weather} />
+            <DayCard weather={this.getDays(forecast)[0]} />
+            <DayCard weather={this.getDays(forecast)[1]} />
+            <DayCard weather={this.getDays(forecast)[2]} />
+            <DayCard weather={this.getDays(forecast)[3]} />
+          </Slider>
 
-        <Slider arrows={false}>
-          <IntraDayTable data={intraDay[0]}/>
-          <IntraDayTable data={intraDay[1]}/>
-          <IntraDayTable data={intraDay[2]}/>
-          <IntraDayTable data={intraDay[3]}/>
-          <IntraDayTable data={intraDay[4]}/>              
-        </Slider>
+          <Slider arrows={false}>
+            <IntraDayTable data={intraDay[0]}/>
+            <IntraDayTable data={intraDay[1]}/>
+            <IntraDayTable data={intraDay[2]}/>
+            <IntraDayTable data={intraDay[3]}/>
+            <IntraDayTable data={intraDay[4]}/>              
+          </Slider>
+        </div>
       </div>
       );
   }

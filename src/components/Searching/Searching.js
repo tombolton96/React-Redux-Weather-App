@@ -4,7 +4,6 @@ import './Searching.scss';
 const Searching = () => {
     return(
         <div className='searching'>
-            Searching...
         </div>
     );
 }
