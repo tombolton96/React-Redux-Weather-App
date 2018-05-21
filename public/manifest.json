@@ -1,6 +1,6 @@
 {
-  "short_name": "React Weather",
-  "name": "React Weather",
+  "short_name": "World Weather",
+  "name": "World Weather",
   "icons": [
     {
       "src": "android-icon-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#fff",
+  "theme_color": "#003366",
   "background_color": "#fff"
 }
