@@ -3,9 +3,6 @@
 body {
     color: #fff;
     font-family: Raleway, sans-serif;
-    // transition: background-image 1s;
-    background: rgba(0,0,100,0.25);
-    background-blend-mode: darken;
     margin: 0;
     padding: 0;
     background-attachment: fixed;
@@ -49,6 +46,7 @@ body {
         animation-timing-function: linear;
         text-align: center;
         margin: 50% 0;
+        color: #003366;
 }
 
 .clear {
