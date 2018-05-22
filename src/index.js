@@ -6,8 +6,6 @@ import registerServiceWorker from './registerServiceWorker';
 import configureStore from './Store/configureStore';
 import { Provider } from 'react-redux';
 
-import 'font-awesome/css/font-awesome.min.css';
-
 const store = configureStore();
 
 require('dotenv').config()
