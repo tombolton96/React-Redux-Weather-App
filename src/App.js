@@ -7,7 +7,7 @@ import './App.scss';
 import DayCard from './components/DayCard/DayCard';
 import IntraDayTable from './components/IntraDayTable/IntraDayTable';
 import SearchBar from './components/SearchBar/SearchBar';
-import Slider from './components/Carousel/Slider';
+import Slider from './components/Slider/Slider';
 import Searching from './components/Searching/Searching';
 
 class App extends Component {
