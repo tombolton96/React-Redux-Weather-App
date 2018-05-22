@@ -30,7 +30,9 @@ export function receiveWeather(data) {
         icon: data.weather[0].icon,
         date: data.dt,
         city: data.name,
-        country: data.sys.country
+        country: data.sys.country,
+        sunrise: data.sys.sunrise,
+        sunset: data.sys.sunset
     } : {id:800};
     return {type: types.RECEIVE_WEATHER, weather};
 }
