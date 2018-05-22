@@ -21,11 +21,11 @@ class IntraDayTable extends Component {
             const time = new Date(obj.date*1000).toLocaleTimeString();
 
             return(
-                <tr key={i}>
-                    <td className='time'>{time.substring(0, time.length-3)}</td>
+                <tr key={i} style={{width:'100%'}}>
+                    <td style={{fontWeight:'bold'}}>{time.substring(0, time.length-3)}</td>
                     <td>{obj.temperature}&deg;C</td>
                     <td className='capitalise'>{obj.description}</td>
-                    <td><img src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
+                    <td><img width='30px' height='30px' src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
                 </tr>
             );
         });
@@ -34,9 +34,17 @@ class IntraDayTable extends Component {
     render() {
         const { data } = this.state;
 
+        const wrapperStyle = {
+            margin: '5%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
+        };
+
         return data.length ? (
-            <div className="tablewrapper">
-                <table>
+            <div style={wrapperStyle}>
+                <table style={{borderCollapse:'collapse', width: '100%'}}>
                     <tbody>
                         {this.getRows(data)}    
                     </tbody>
