@@ -47,9 +47,9 @@ class SearchBar extends Component {
 
         return(
             <div className="searchbar">
-                <input placeholder="City" value={city} onChange={this.getCityName} />
-                <input placeholder="Country" value={country} onChange={this.getCountryName} />
-                <button className="fa fa-search" onClick={this.sendSearchToParent} ></button>
+                <input label="city" placeholder="City" value={city} onChange={this.getCityName} />
+                <input label="country" placeholder="Country" value={country} onChange={this.getCountryName} />
+                <button name="search" className="fa fa-search" onClick={this.sendSearchToParent} ></button>
             </div>
         );
     }
