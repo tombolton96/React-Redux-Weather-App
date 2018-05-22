@@ -1,0 +1,20 @@
+{
+  "short_name": "World Weather",
+  "name": "World Weather",
+  "icons": [
+    {
+      "src": "android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "GooglePlayStore.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#003366",
+  "background_color": "#00a2e8"
+}
