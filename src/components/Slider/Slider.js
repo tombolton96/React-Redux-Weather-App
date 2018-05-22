@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as sliderActions from '../../Actions/sliderActions';
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
-import './slider.scss'; 
 
 class Slider extends Component {
   constructor(props) {
@@ -19,13 +18,20 @@ class Slider extends Component {
     const { arrows, isLoading } = this.state,
         { children, count } = this.props;
 
+    const outerStyle = {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    };
+
     return isLoading ? (<div>Loading...</div>) : (
-        <div className="outer">
+        <div style={outerStyle}>
             <div style={arrows === false ? {display: 'none'} : {display: 'initial'}
                  && count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}>
                 <LeftArrow previousSlide={this.props.sliderActions.prevSlide} />
             </div>
-            <div className="slider container" >
+            <div className="container" style={{width:'100%'}}>
                 <div style={count === 0 ? {display: 'flex'} : {display:'none'}}>{children[0]}</div>
                 <div style={count === 1 ? {display: 'flex'} : {display:'none'}}>{children[1]}</div>
                 <div style={count === 2 ? {display: 'flex'} : {display:'none'}}>{children[2]}</div>

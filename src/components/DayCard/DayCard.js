@@ -61,11 +61,25 @@ class DayCard extends Component {
     }
 
     render() {
+        const cardStyle = {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+        };
+
+        const tempStyle = {
+            fontSize: '1.5em',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        };
+
         return this.state.temperature ? (
-            <div className='daycard'>
+            <div style={cardStyle}>
                 <h3>{this.state.day}</h3>
-                    <div className="temp">
-                        <p>{this.state.temperature}&deg;C</p>
+                    <div style={tempStyle}>
+                        <p style={{margin:'5%'}}>{this.state.temperature}&deg;C</p>
                     </div>
                     <img src={`https://openweathermap.org/img/w/${this.state.icon}.png`} alt={this.state.description}/>
                     <p className='capitalise'>{this.state.description}</p>

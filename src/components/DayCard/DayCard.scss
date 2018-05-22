@@ -12,28 +12,6 @@
     margin: 5px;
 }
 
-.daycard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.temp {
-    font-size: 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    p {
-        margin: 5%;
-    }
-
-    .minmax {
-        font-size: 0.5em;
-    }
-}
-
 .capitalise:first-letter {
     text-transform: capitalize;
 }

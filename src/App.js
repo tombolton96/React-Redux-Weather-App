@@ -102,15 +102,30 @@ class App extends Component {
     const { weather, forecast, isLoading, searching } = this.state,
           { weatherActions } = this.props;
     const intraDay = this.getDayData(forecast);
+
+    const appStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: '100%',
+      margin: '0'
+    };
+
+    const headerStyle = {
+      textAlign:'center',
+      fontSize:'2em'
+    };
     
     return isLoading ? (<div className='loading'>Loading...</div>) : (
-      <div className='App'>
+      <div style={appStyle}>
         <div style={searching ? {display:'block'} : {display:'none'}} className='searchingContainer'><Searching/></div>
         
         <div style={searching ? {filter: 'blur(2px)'} : {}}>
           <SearchBar parentCallback={weatherActions.search}/>
           
-          <h2>{weather.city} <span>{weather.country}</span></h2>
+          <h2 style={headerStyle}>{weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span></h2>
         
           <Slider arrows={true}>
             <DayCard weather={weather} />
@@ -123,9 +138,9 @@ class App extends Component {
           <Slider arrows={false}>
             <div>
               <IntraDayTable data={intraDay[0]}/>
-              <div className='sun'>
-                <p><span>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
-                <p><span>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
+              <div style={{textAlign:'center'}}>
+                <p><span style={{fontWeight:'bold'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
+                <p><span style={{fontWeight:'bold'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
               </div>
             </div>
             <IntraDayTable data={intraDay[1]}/>
@@ -133,7 +148,6 @@ class App extends Component {
             <IntraDayTable data={intraDay[3]}/>
             <IntraDayTable data={intraDay[4]}/>              
           </Slider>
-
         </div>
       </div>
       );
