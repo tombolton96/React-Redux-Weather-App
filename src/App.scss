@@ -33,6 +33,10 @@ body {
 
 .sun {
     text-align: center;
+
+    p span {
+        font-weight: bold;
+    }
 }
 
 @keyframes loading {

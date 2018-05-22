@@ -124,8 +124,8 @@ class App extends Component {
             <div>
               <IntraDayTable data={intraDay[0]}/>
               <div className='sun'>
-                <p>Sunrise - {this.getSunTimes(weather.sunrise)}</p>
-                <p>Sunset - {this.getSunTimes(weather.sunset)}</p>
+                <p><span>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
+                <p><span>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
               </div>
             </div>
             <IntraDayTable data={intraDay[1]}/>
