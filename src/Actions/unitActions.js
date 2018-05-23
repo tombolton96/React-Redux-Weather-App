@@ -1,4 +1,4 @@
-import * as types from './searchingActionTypes';
+import * as types from './miscActionTypes';
 
 export function toFahrenheit() {
     return {type: types.FAHRENHEIT, unit: 'fahrenheit'};

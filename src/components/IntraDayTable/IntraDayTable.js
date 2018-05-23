@@ -2,18 +2,35 @@ import React, {Component} from 'react';
 import './IntraDayTable.scss';
 
 class IntraDayTable extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
+        this.setUnits = this.setUnits.bind(this);
         this.getRows = this.getRows.bind(this);
 
         this.state = {
-            data: []
+            data: [],
+            units: props.unit
         };
     }
 
     componentWillReceiveProps(newProps) {
-        this.setState({data: newProps.data});
+        this.setState({
+            data: newProps.data,
+            units: newProps.unit
+        });
+    }
+
+    setUnits(tempC, tempF) {
+        switch(this.state.units) {
+            case 'fahrenheit':
+                return(<td>{tempF}&deg;F</td>);
+                break;
+            case 'celsius':
+            default:
+                return(<td>{tempC}&deg;C</td>);
+                break;
+        }
     }
 
     getRows(intraDayArray) {
@@ -23,7 +40,7 @@ class IntraDayTable extends Component {
             return(
                 <tr key={i} style={{width:'100%'}}>
                     <td style={{fontWeight:'bold'}}>{time.substring(0, time.length-3)}</td>
-                    <td>{obj.temperature}&deg;C</td>
+                    {/* <td>{obj.tempC}&deg;C</td> */this.setUnits(obj.tempC, obj.tempF)}
                     <td className='capitalise'>{obj.description}</td>
                     <td><img width='30px' height='30px' src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
                 </tr>

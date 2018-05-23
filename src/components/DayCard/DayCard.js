@@ -6,20 +6,26 @@ class DayCard extends Component {
     constructor(props) {
         super(props);
 
+        this.setUnits = this.setUnits.bind(this);
+
         this.state = {
                 description: '',
-                temperature: undefined,
+                tempC: undefined,
+                tempF: undefined,
                 icon: '',
-                day: ''
+                day: '',
+                units: props.unit
         };
     }
 
     componentWillReceiveProps(newProps) {
         newProps.weather ? this.setState({
             description: newProps.weather.description,
-            temperature: newProps.weather.temperature,
+            tempC: newProps.weather.tempC,
+            tempF: newProps.weather.tempF,
             icon: newProps.weather.icon,
-            day: this.getDay(newProps.weather.date)
+            day: this.getDay(newProps.weather.date),
+            units: newProps.unit
         })
         : this.setState({...this.state});
     }
@@ -60,6 +66,18 @@ class DayCard extends Component {
         }
     }
 
+    setUnits() {
+        switch(this.state.units) {
+            case 'fahrenheit':
+                return(<p style={{margin:'5%'}}>{this.state.tempF}&deg;F</p>);
+                break;
+            case 'celsius':
+            default:
+                return(<p style={{margin:'5%'}}>{this.state.tempC}&deg;C</p>);
+                break;
+        }
+    }
+
     render() {
         const cardStyle = {
             display: 'flex',
@@ -75,11 +93,11 @@ class DayCard extends Component {
             alignItems: 'center'
         };
 
-        return this.state.temperature ? (
+        return this.state.description ? (
             <div style={cardStyle}>
                 <h3>{this.state.day}</h3>
                     <div style={tempStyle}>
-                        <p style={{margin:'5%'}}>{this.state.temperature}&deg;C</p>
+                        {this.setUnits()}
                     </div>
                     <img src={`https://openweathermap.org/img/w/${this.state.icon}.png`} alt={this.state.description}/>
                     <p className='capitalise'>{this.state.description}</p>

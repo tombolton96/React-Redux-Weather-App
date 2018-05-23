@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { FAHRENHEIT, CELSIUS } from '../Actions/searchingActionTypes';
+import { FAHRENHEIT, CELSIUS } from '../Actions/miscActionTypes';
 
 export default function units(state = initialState.units, action) {
     let newState;

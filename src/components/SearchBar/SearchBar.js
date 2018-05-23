@@ -8,7 +8,7 @@ class SearchBar extends Component {
 
         this.getCityName = this.getCityName.bind(this);
         this.getCountryName = this.getCountryName.bind(this);
-        this.sendSearchToParent = this.sendSearchToParent.bind(this);
+        this.dispatchSearch = this.dispatchSearch.bind(this);
 
         this.state = {
             city: '',
@@ -34,8 +34,8 @@ class SearchBar extends Component {
         return country ? iso3166.country(country).code : undefined;
     }
 
-    sendSearchToParent(search) {
-        this.props.parentCallback(this.state.city, this.getCountryCode(this.state.country));
+    dispatchSearch() {
+        this.props.searchAction(this.state.city, this.getCountryCode(this.state.country));
         this.setState({
             city: '',
             country: ''
@@ -43,13 +43,13 @@ class SearchBar extends Component {
     }
 
     render() {
-        const {city, country} = this.state;
+        const { city, country } = this.state;
 
         return(
             <div className="searchbar">
                 <input aria-label="city" placeholder="City" value={city} onChange={this.getCityName} />
                 <input aria-label="country" placeholder="Country" value={country} onChange={this.getCountryName} />
-                <button name="search" aria-label="search" className="fa fa-search" onClick={this.sendSearchToParent} ></button>
+                <button name="search" aria-label="search" className="fa fa-search" onClick={this.dispatchSearch} ></button>
             </div>
         );
     }

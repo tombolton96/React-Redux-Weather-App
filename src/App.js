@@ -27,9 +27,7 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
-    this.props.weatherActions.fetchWeather();
-  }
+  componentWillMount = () => this.props.weatherActions.fetchWeather();
 
   componentWillReceiveProps(newProps) {
     this.setState({
@@ -40,9 +38,7 @@ class App extends Component {
     });
   }
 
-  componentDidUpdate() {
-    this.setBackground(this.state.weather.id);
-  }
+  componentDidUpdate = () => this.setBackground(this.state.weather.id);
 
   setBackground(id) {
     let first = String(id).charAt(0);
@@ -99,13 +95,13 @@ class App extends Component {
     });
   }
 
-  getSunTimes(time) {
-    return new Date(time * 1000).toLocaleTimeString();  
-  }
+  getSunTimes = time => new Date(time * 1000).toLocaleTimeString();
 
   render() {
-    const { weather, forecast, isLoading, searching } = this.state,
-          { weatherActions, unitActions } = this.props;
+    const { weather, forecast, isLoading, searching } = this.state;
+      
+    const { weatherActions, unitActions, units } = this.props;
+
     const intraDay = this.getDayData(forecast);
 
     const appStyle = {
@@ -123,39 +119,41 @@ class App extends Component {
       fontSize:'2em'
     };
     
-    return isLoading ? (<div className='loading'>Loading...</div>) : (
-      <div style={appStyle}>
-        <div style={searching ? {display:'block'} : {display:'none'}} className='searchingContainer'><Searching/></div>
-        
-        <div style={searching ? {filter: 'blur(2px)'} : {}}>
-          <SearchBar parentCallback={weatherActions.search}/>
+    return isLoading ? (<div className='loading'>Loading...</div>)
+      : (<div style={appStyle}>
 
-          <UnitSwitch changeUnits={unitActions}/>
+          <div style={searching ? {display:'block'} : {display:'none'}} className='searchingContainer'>
+            <Searching/>
+          </div>
+          
+          <div style={searching ? {filter: 'blur(2px)'} : {}}>
 
-          <h2 style={headerStyle}>{weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span></h2>
-        
-          <Slider arrows={true}>
-            <DayCard weather={weather} />
-            <DayCard weather={this.getDays(forecast)[0]} />
-            <DayCard weather={this.getDays(forecast)[1]} />
-            <DayCard weather={this.getDays(forecast)[2]} />
-            <DayCard weather={this.getDays(forecast)[3]} />
-          </Slider>
+            <SearchBar searchAction={weatherActions.search}/>
+            <UnitSwitch changeUnits={unitActions} unit={units}/>
+            <h2 style={headerStyle}>{weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span></h2>
+          
+            <Slider arrows={true}>
+              <DayCard weather={weather} unit={units}/>
+              <DayCard weather={this.getDays(forecast)[0]} unit={units} />
+              <DayCard weather={this.getDays(forecast)[1]} unit={units} />
+              <DayCard weather={this.getDays(forecast)[2]} unit={units} />
+              <DayCard weather={this.getDays(forecast)[3]} unit={units} />
+            </Slider>
 
-          <Slider arrows={false}>
-            <IntraDayTable data={intraDay[0]}>
-              <div style={{textAlign:'center'}}>
-                <p><span style={{fontWeight:'bold'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
-                <p><span style={{fontWeight:'bold'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
-              </div>
-            </IntraDayTable>
-            <IntraDayTable data={intraDay[1]}/>
-            <IntraDayTable data={intraDay[2]}/>
-            <IntraDayTable data={intraDay[3]}/>
-            <IntraDayTable data={intraDay[4]}/>              
-          </Slider>
+            <Slider arrows={false}>
+              <IntraDayTable data={intraDay[0]} unit={units}>
+                <div style={{textAlign:'center'}}>
+                  <p><span style={{fontWeight:'bold'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
+                  <p><span style={{fontWeight:'bold'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
+                </div>
+              </IntraDayTable>
+              <IntraDayTable data={intraDay[1]} unit={units}/>
+              <IntraDayTable data={intraDay[2]} unit={units}/>
+              <IntraDayTable data={intraDay[3]} unit={units}/>
+              <IntraDayTable data={intraDay[4]} unit={units}/>              
+            </Slider>
+          </div>
         </div>
-      </div>
       );
   }
 }
@@ -165,7 +163,7 @@ function mapStateToProps(state) {
     weather: state.weather,
     forecast: state.forecast,
     searching: state.searching,
-    fahrenheit: state.fahrenheit
+    units: state.units
   };
 }
 

@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React from 'react';
 
-class UnitSwitch extends Component {
-    // constructor() {
-    //     super();
+const UnitSwitch = (props) => {
 
-    // }
+    const { changeUnits, unit } = props;
 
-    switchStyle = {
+    const switchStyle = {
         display:'flex',
         flexDirection:'row',
         justifyContent:'center',
         margin:'10px'
     };
-
-    buttonStyle = {
-        margin:'0 5px',
-        textAlign: 'center',
-        border: '1px solid #fff'
+    
+    const buttonPressed = {
+        border: '2px inset rgba(255,255,255, 0.5)',
+        background: 'linear-gradient(to bottom right, rgba(190,190,190,0.5), rgba(190,190,190,0.3))',
+        color: 'rgb(190,190,190)'
     };
 
-    render() {
-        return(
-            <div style={this.switchStyle}>
-                <div onClick={this.props.changeUnits.toCelsius} style={this.buttonStyle}>&deg;C</div>
-                <div onClick={this.props.changeUnits.toFahrenheit} style={this.buttonStyle}>&deg;F</div>
-            </div>
-        );
-    }
-}
+    return(
+        <div style={switchStyle}>
+            <button 
+                style={unit === 'celsius' ? buttonPressed : {}} 
+                aria-label='celsius' 
+                onClick={changeUnits.toCelsius}>&deg;C</button>
 
-function mapDispatchToProps(dispatch) {
-    
-};
+            <button 
+                style={unit === 'fahrenheit' ? buttonPressed : {}} 
+                aria-label='fahrenheit' 
+                onClick={changeUnits.toFahrenheit}>&deg;F</button>
+        </div>
+    );
+}
 
 export default UnitSwitch;
