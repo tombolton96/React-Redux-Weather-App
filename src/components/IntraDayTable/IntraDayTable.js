@@ -49,6 +49,7 @@ class IntraDayTable extends Component {
                         {this.getRows(data)}    
                     </tbody>
                 </table>
+                {this.props.children}
             </div>
         ) : <div>There is currently no data to display for this day</div>;
     }
