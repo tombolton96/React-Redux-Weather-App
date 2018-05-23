@@ -8,19 +8,21 @@
 
 button {
     border-radius: 100%;
-    line-height: 2em;
-    height: 2em;
-    width: 2em;
-    border: 1px outset rgba(255,255,255, 0.5);
+    line-height: 2.5em;
+    height: 2.5em;
+    width: 2.5em;
+    border: 2px outset rgba(190,190,190, 0.5);
     color: #fff;
-    padding: 6px;
+    padding: 0;
     margin-left: 2px;
-    background: linear-gradient(to bottom right, rgba(190,190,190,0), rgba(190,190,190,0.4));
+    background: linear-gradient(to bottom right, rgba(190,190,190,0.3), rgba(190,190,190,0.5));
     cursor: pointer;
     outline: none;
+    text-align: center;
 
     &:active {
         border: 1px inset rgba(255,255,255, 0.5);
+        background: linear-gradient(to bottom right, rgba(190,190,190,0.5), rgba(190,190,190,0.3));
     }
 }
 

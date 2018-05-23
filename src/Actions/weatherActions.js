@@ -1,5 +1,5 @@
 import * as types from './weatherActionTypes';
-import { SEARCHING } from './searchingActionTypes';
+import { SEARCHING } from './miscActionTypes';
 
 const key = process.env.REACT_APP_API_KEY;
 
@@ -21,12 +21,17 @@ function searchForecastUrl(city, country) {
         : `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${key}`; 
 };
 
+function convertToFahrenheit(temp) { 
+    return (temp * 1.8) + 32; 
+}
+
 export function receiveWeather(data) {
 
     const weather = data ? {
         id: data.weather[0].id,
         description: data.weather[0].description,
-        temperature: Math.round(data.main.temp*10)/10,
+        tempC: Math.round(data.main.temp*10)/10,
+        tempF: Math.round(convertToFahrenheit(data.main.temp)*10)/10,
         icon: data.weather[0].icon,
         date: data.dt,
         city: data.name,
@@ -42,7 +47,8 @@ export function receiveForecast(data) {
         return {
             date: p.dt,
             datestring: p.dt_txt,
-            temperature: Math.round(p.main.temp*10)/10,
+            tempC: Math.round(p.main.temp*10)/10,
+            tempF: Math.round(convertToFahrenheit(p.main.temp)*10)/10,
             description: p.weather[0].description,
             icon: p.weather[0].icon
         };
