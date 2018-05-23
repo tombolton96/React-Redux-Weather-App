@@ -21,6 +21,10 @@ function searchForecastUrl(city, country) {
         : `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${key}`; 
 };
 
+function celsiusToFahrenheit(temp) {
+    return (temp * 1.8) + 32;
+};
+
 export function receiveWeather(data) {
 
     const weather = data ? {

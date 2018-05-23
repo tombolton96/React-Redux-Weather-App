@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+//actions
 import * as weatherActions from './Actions/weatherActions';
+import * as unitActions from './Actions/unitActions';
+//stylesheets
 import './index.scss';
 import './App.scss';
+//components
 import DayCard from './components/DayCard/DayCard';
 import IntraDayTable from './components/IntraDayTable/IntraDayTable';
 import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Slider/Slider';
 import Searching from './components/Searching/Searching';
+import UnitSwitch from './components/UnitSwitch/UnitSwitch';
 
 class App extends Component {
   constructor() {
@@ -100,7 +105,7 @@ class App extends Component {
 
   render() {
     const { weather, forecast, isLoading, searching } = this.state,
-          { weatherActions } = this.props;
+          { weatherActions, unitActions } = this.props;
     const intraDay = this.getDayData(forecast);
 
     const appStyle = {
@@ -124,7 +129,9 @@ class App extends Component {
         
         <div style={searching ? {filter: 'blur(2px)'} : {}}>
           <SearchBar parentCallback={weatherActions.search}/>
-          
+
+          <UnitSwitch changeUnits={unitActions}/>
+
           <h2 style={headerStyle}>{weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span></h2>
         
           <Slider arrows={true}>
@@ -157,13 +164,15 @@ function mapStateToProps(state) {
   return {
     weather: state.weather,
     forecast: state.forecast,
-    searching: state.searching
+    searching: state.searching,
+    fahrenheit: state.fahrenheit
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    weatherActions: bindActionCreators(weatherActions, dispatch)
+    weatherActions: bindActionCreators(weatherActions, dispatch),
+    unitActions: bindActionCreators(unitActions, dispatch)
   };
 }
 
