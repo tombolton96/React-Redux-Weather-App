@@ -1,23 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const Indicator = props => {
-    const selected = {
+class Indicator extends Component {
+    render() {
+        const { sliderCount } = this.props;
 
-    };
-    const notSelected = {
-        height: '1px',
-        backgroundColor: 'rbgba(190,190,190,0.3)'
-    };
+        const style = {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            margin: '20px 10px'
+        };
+        const selected = {
+            height: '1px',
+            width: '100%',
+            border: '1px solid rgba(255,255,255,1)',
+            backgroundColor: 'rgba(190,190,190,1)'
+        };
+        const notSelected = {
+            height: '1px',
+            width: '100%',
+            border: '1px solid rgba(190,190,190,0.3)',
+            backgroundColor: 'rgba(190,190,190,0.3)'
+        };
 
-    return(
-        <div>
-            <div style={notSelected}>1</div>
-            <div style={notSelected}>2</div>
-            <div style={notSelected}>3</div>
-            <div style={notSelected}>4</div>
-            <div style={notSelected}>5</div>
-        </div>
-    );
+        return(
+            <div style={style}>
+                <div style={sliderCount === 0 ? selected : notSelected}></div>
+                <div style={sliderCount === 1 ? selected : notSelected}></div>
+                <div style={sliderCount === 2 ? selected : notSelected}></div>
+                <div style={sliderCount === 3 ? selected : notSelected}></div>
+                <div style={sliderCount === 4 ? selected : notSelected}></div>
+            </div>
+        );
+    }
 }
 
-export default Indicator;
+function mapStateToProps(state) {
+    return {
+        sliderCount: state.sliderCount
+    };
+};
+
+export default connect(mapStateToProps)(Indicator);

@@ -14,6 +14,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Slider/Slider';
 import Searching from './components/Searching/Searching';
 import UnitSwitch from './components/UnitSwitch/UnitSwitch';
+import Indicator from './components/Slider/Indicator';
 
 class App extends Component {
   constructor() {
@@ -131,7 +132,8 @@ class App extends Component {
             <SearchBar searchAction={weatherActions.search}/>
             <UnitSwitch changeUnits={unitActions} unit={units}/>
             <h2 style={headerStyle}>{weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span></h2>
-          
+            <Indicator />
+
             <Slider arrows={true}>
               <DayCard weather={weather} unit={units}/>
               <DayCard weather={this.getDays(forecast)[0]} unit={units} />
