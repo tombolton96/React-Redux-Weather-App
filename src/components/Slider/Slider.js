@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect }from 'react-redux';
 import { bindActionCreators } from 'redux';
+//Actions
 import * as sliderActions from '../../Actions/sliderActions';
+//Components
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
+import Indicator from './Indicator';
 
 class Slider extends Component {
   constructor(props) {
@@ -27,6 +30,7 @@ class Slider extends Component {
 
     return isLoading ? (<div>Loading...</div>) : (
         <div style={outerStyle}>
+            <Indicator />
             <div style={arrows === false ? {display: 'none'} : {display: 'initial'}
                  && count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}>
                 <LeftArrow previousSlide={this.props.sliderActions.prevSlide} />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//Stylesheets
 // import theme from '../../index.scss';
 import './DayCard.scss';
 
@@ -10,8 +11,8 @@ class DayCard extends Component {
 
         this.state = {
                 description: '',
-                tempC: undefined,
-                tempF: undefined,
+                tempC: null,
+                tempF: null,
                 icon: '',
                 day: '',
                 units: props.unit
@@ -36,31 +37,31 @@ class DayCard extends Component {
             case 0:
                 return 'Sunday';
                 //eslint-disable-next-line
-                break;
+                // break;
             case 1:
                 return 'Monday';
                 //eslint-disable-next-line
-                break;
+                // break;
             case 2:
                 return 'Tuesday';
                 //eslint-disable-next-line
-                break;
+                // break;
             case 3:
                 return 'Wednesday';
                 //eslint-disable-next-line
-                break;
+                // break;
             case 4:
                 return 'Thursday';
                 //eslint-disable-next-line
-                break;
+                // break;
             case 5:
                 return 'Friday';
                 //eslint-disable-next-line
-                break;
+                // break;
             case 6:
                 return 'Saturday';
                 //eslint-disable-next-line
-                break;
+                // break;
             default:
                 console.log('error loading date');
         }
@@ -70,15 +71,17 @@ class DayCard extends Component {
         switch(this.state.units) {
             case 'fahrenheit':
                 return(<p style={{margin:'5%'}}>{this.state.tempF}&deg;F</p>);
-                break;
+                // break;
             case 'celsius':
             default:
                 return(<p style={{margin:'5%'}}>{this.state.tempC}&deg;C</p>);
-                break;
+                // break;
         }
     }
 
     render() {
+        const { day, icon, description } = this.state;
+
         const cardStyle = {
             display: 'flex',
             flexDirection: 'column',
@@ -95,12 +98,12 @@ class DayCard extends Component {
 
         return this.state.description ? (
             <div style={cardStyle}>
-                <h3>{this.state.day}</h3>
+                <h3>{day}</h3>
                     <div style={tempStyle}>
                         {this.setUnits()}
                     </div>
-                    <img src={`https://openweathermap.org/img/w/${this.state.icon}.png`} alt={this.state.description}/>
-                    <p className='capitalise'>{this.state.description}</p>
+                    <img src={`https://openweathermap.org/img/w/${icon}.png`} alt={description}/>
+                    <p className='capitalise'>{description}</p>
             </div>) : (<h4>Please search for location</h4>);
     }
 }

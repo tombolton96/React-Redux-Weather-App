@@ -25,11 +25,11 @@ class IntraDayTable extends Component {
         switch(this.state.units) {
             case 'fahrenheit':
                 return(<td>{tempF}&deg;F</td>);
-                break;
+                // break;
             case 'celsius':
             default:
                 return(<td>{tempC}&deg;C</td>);
-                break;
+                // break;
         }
     }
 

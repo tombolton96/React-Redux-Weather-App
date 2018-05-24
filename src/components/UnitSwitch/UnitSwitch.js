@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UnitSwitch = (props) => {
+const UnitSwitch = props => {
 
     const { changeUnits, unit } = props;
 
@@ -17,7 +17,7 @@ const UnitSwitch = (props) => {
         color: 'rgb(190,190,190)'
     };
 
-    return(
+    return (
         <div style={switchStyle}>
             <button 
                 style={unit === 'celsius' ? buttonPressed : {}} 
