@@ -1,0 +1,23 @@
+.indicator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 10px;
+
+    div {
+        transition: background-color, border 0.5s;
+        height: 1px;
+        width: 100%;
+    }
+}
+
+
+.selected {
+    border: 1px solid rgba(255,255,255,1);
+    background-color: rgba(255,255,255,1);
+}
+
+.notselected {
+    border: 1px solid rgba(190,190,190,0.3);
+    background-color: rgba(190,190,190,0.3);
+}
