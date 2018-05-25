@@ -25,11 +25,9 @@ class IntraDayTable extends Component {
         switch(this.state.units) {
             case 'fahrenheit':
                 return(<td>{tempF}&deg;F</td>);
-                // break;
             case 'celsius':
             default:
                 return(<td>{tempC}&deg;C</td>);
-                // break;
         }
     }
 
@@ -40,7 +38,7 @@ class IntraDayTable extends Component {
             return(
                 <tr key={i} style={{width:'100%'}}>
                     <td style={{fontWeight:'bold'}}>{time.substring(0, time.length-3)}</td>
-                    {/* <td>{obj.tempC}&deg;C</td> */this.setUnits(obj.tempC, obj.tempF)}
+                    {this.setUnits(obj.tempC, obj.tempF)}
                     <td className='capitalise'>{obj.description}</td>
                     <td><img width='30px' height='30px' src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
                 </tr>

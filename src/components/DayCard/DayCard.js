@@ -36,32 +36,18 @@ class DayCard extends Component {
         switch(day) {
             case 0:
                 return 'Sunday';
-                //eslint-disable-next-line
-                // break;
             case 1:
                 return 'Monday';
-                //eslint-disable-next-line
-                // break;
             case 2:
                 return 'Tuesday';
-                //eslint-disable-next-line
-                // break;
             case 3:
                 return 'Wednesday';
-                //eslint-disable-next-line
-                // break;
             case 4:
                 return 'Thursday';
-                //eslint-disable-next-line
-                // break;
             case 5:
                 return 'Friday';
-                //eslint-disable-next-line
-                // break;
             case 6:
                 return 'Saturday';
-                //eslint-disable-next-line
-                // break;
             default:
                 console.log('error loading date');
         }
@@ -71,11 +57,9 @@ class DayCard extends Component {
         switch(this.state.units) {
             case 'fahrenheit':
                 return(<p style={{margin:'5%'}}>{this.state.tempF}&deg;F</p>);
-                // break;
             case 'celsius':
             default:
                 return(<p style={{margin:'5%'}}>{this.state.tempC}&deg;C</p>);
-                // break;
         }
     }
 
