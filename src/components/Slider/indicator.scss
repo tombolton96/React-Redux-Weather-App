@@ -1,0 +1,22 @@
+.indicator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 10px;
+
+    div {
+        height: 1px;
+        width: 100%;
+        margin: 0 5px;
+    }
+}
+
+.selected {
+    border: 1px solid rgba(255,255,255,1);
+    background-color: rgba(255,255,255,1);
+}
+
+.notselected {
+    border: 1px solid rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.1);
+}

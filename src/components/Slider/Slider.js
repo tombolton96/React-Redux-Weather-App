@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect }from 'react-redux';
 import { bindActionCreators } from 'redux';
+//Actions
 import * as sliderActions from '../../Actions/sliderActions';
+//stylesheets
+import './Slider.scss';
+//Components
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
 
@@ -16,20 +20,13 @@ class Slider extends Component {
 
   render() {
     const { arrows, isLoading } = this.state,
-        { children, count } = this.props;
-
-    const outerStyle = {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    };
+        { children, count, sliderActions } = this.props;
 
     return isLoading ? (<div>Loading...</div>) : (
-        <div style={outerStyle}>
+        <div className='outer'>
             <div style={arrows === false ? {display: 'none'} : {display: 'initial'}
                  && count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}>
-                <LeftArrow previousSlide={this.props.sliderActions.prevSlide} />
+                <LeftArrow previousSlide={sliderActions.prevSlide} />
             </div>
             <div className="container" style={{width:'100%'}}>
                 <div style={count === 0 ? {display: 'flex'} : {display:'none'}}>{children[0]}</div>
@@ -40,7 +37,7 @@ class Slider extends Component {
             </div>
             <div style={arrows === false ? {display: 'none'} : {display: 'initial'}
                 && count === 4 ? {visibility: 'hidden'} : {visibility: 'visible'}}>
-                <RightArrow nextSlide={this.props.sliderActions.nextSlide} />
+                <RightArrow nextSlide={sliderActions.nextSlide} />
             </div>
         </div>
     );

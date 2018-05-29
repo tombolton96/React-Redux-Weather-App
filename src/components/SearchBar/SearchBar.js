@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import iso3166 from 'iso-3166-2';
+import iso3166 from 'iso-3166-2'; //Converts country names to codes
 import './SearchBar.scss';
 
 class SearchBar extends Component {
@@ -30,9 +30,7 @@ class SearchBar extends Component {
         });
     }
 
-    getCountryCode(country) {
-        return country ? iso3166.country(country).code : undefined;
-    }
+    getCountryCode = country => country ? iso3166.country(country).code : undefined;
 
     dispatchSearch() {
         this.props.searchAction(this.state.city, this.getCountryCode(this.state.country));
@@ -47,9 +45,9 @@ class SearchBar extends Component {
 
         return(
             <div className="searchbar">
-                <input aria-label="city" placeholder="City" value={city} onChange={this.getCityName} />
+                <input id='country' aria-label="city" placeholder="City" value={city} onChange={this.getCityName} />
                 <input aria-label="country" placeholder="Country" value={country} onChange={this.getCountryName} />
-                <button name="search" aria-label="search" className="fa fa-search" onClick={this.dispatchSearch} ></button>
+                <button disabled={!city} name="search" aria-label="search" className="fa fa-search" onClick={this.dispatchSearch} ></button>
             </div>
         );
     }

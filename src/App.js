@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 //actions
 import * as weatherActions from './Actions/weatherActions';
-import * as unitActions from './Actions/unitActions';
 //stylesheets
 import './index.scss';
 import './App.scss';
@@ -14,6 +13,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 import Slider from './components/Slider/Slider';
 import Searching from './components/Searching/Searching';
 import UnitSwitch from './components/UnitSwitch/UnitSwitch';
+import Indicator from './components/Slider/Indicator';
 
 class App extends Component {
   constructor() {
@@ -100,7 +100,7 @@ class App extends Component {
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
       
-    const { weatherActions, unitActions, units } = this.props;
+    const { weatherActions, units } = this.props;
 
     const intraDay = this.getDayData(forecast);
 
@@ -129,9 +129,10 @@ class App extends Component {
           <div style={searching ? {filter: 'blur(2px)'} : {}}>
 
             <SearchBar searchAction={weatherActions.search}/>
-            <UnitSwitch changeUnits={unitActions} unit={units}/>
+            <UnitSwitch unit={units}/>
             <h2 style={headerStyle}>{weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span></h2>
-          
+            <Indicator />
+
             <Slider arrows={true}>
               <DayCard weather={weather} unit={units}/>
               <DayCard weather={this.getDays(forecast)[0]} unit={units} />
@@ -169,8 +170,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    weatherActions: bindActionCreators(weatherActions, dispatch),
-    unitActions: bindActionCreators(unitActions, dispatch)
+    weatherActions: bindActionCreators(weatherActions, dispatch)
   };
 }
 
