@@ -3,6 +3,8 @@ import { connect }from 'react-redux';
 import { bindActionCreators } from 'redux';
 //Actions
 import * as sliderActions from '../../Actions/sliderActions';
+//stylesheets
+import './Slider.scss';
 //Components
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
@@ -20,15 +22,8 @@ class Slider extends Component {
     const { arrows, isLoading } = this.state,
         { children, count, sliderActions } = this.props;
 
-    const outerStyle = {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    };
-
     return isLoading ? (<div>Loading...</div>) : (
-        <div style={outerStyle}>
+        <div className='outer'>
             <div style={arrows === false ? {display: 'none'} : {display: 'initial'}
                  && count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}>
                 <LeftArrow previousSlide={sliderActions.prevSlide} />
