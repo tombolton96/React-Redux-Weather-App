@@ -27,7 +27,7 @@ function convertToFahrenheit(temp) {
 
 export function receiveWeather(data) {
 
-    const weather = data ? {
+    const weather = data.weather ? {
         id: data.weather[0].id,
         description: data.weather[0].description,
         tempC: Math.round(data.main.temp*10)/10,
@@ -84,7 +84,14 @@ export function search(city, country) {
         dispatch(searching(true));
 
         fetch(searchUrl(city, country))
-            .then(response => response.json())
+            .then(response => {
+                if(response.status === 404) {
+                    alert(response.statusText);
+                    dispatch(searching(false));
+                } else {
+                    return response.json();
+                }
+            })
             .then(json => dispatch(receiveWeather(json)))
             .catch(error => console.log(error));
 
