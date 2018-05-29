@@ -45,9 +45,9 @@ class SearchBar extends Component {
 
         return(
             <div className="searchbar">
-                <input aria-label="city" placeholder="City" value={city} onChange={this.getCityName} />
+                <input id='country' aria-label="city" placeholder="City" value={city} onChange={this.getCityName} />
                 <input aria-label="country" placeholder="Country" value={country} onChange={this.getCountryName} />
-                <button name="search" aria-label="search" className="fa fa-search" onClick={this.dispatchSearch} ></button>
+                <button disabled={!city} name="search" aria-label="search" className="fa fa-search" onClick={this.dispatchSearch} ></button>
             </div>
         );
     }
