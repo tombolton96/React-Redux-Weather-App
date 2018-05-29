@@ -22,6 +22,6 @@ function mapStateToProps(state) {
     return {
         sliderCount: state.sliderCount
     };
-};
+}
 
 export default connect(mapStateToProps)(Indicator);

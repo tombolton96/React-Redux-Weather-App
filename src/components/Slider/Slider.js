@@ -18,7 +18,7 @@ class Slider extends Component {
 
   render() {
     const { arrows, isLoading } = this.state,
-        { children, count } = this.props;
+        { children, count, sliderActions } = this.props;
 
     const outerStyle = {
         display: 'flex',
@@ -31,7 +31,7 @@ class Slider extends Component {
         <div style={outerStyle}>
             <div style={arrows === false ? {display: 'none'} : {display: 'initial'}
                  && count === 0 ? {visibility: 'hidden'} : {visibility: 'visible'}}>
-                <LeftArrow previousSlide={this.props.sliderActions.prevSlide} />
+                <LeftArrow previousSlide={sliderActions.prevSlide} />
             </div>
             <div className="container" style={{width:'100%'}}>
                 <div style={count === 0 ? {display: 'flex'} : {display:'none'}}>{children[0]}</div>
@@ -42,7 +42,7 @@ class Slider extends Component {
             </div>
             <div style={arrows === false ? {display: 'none'} : {display: 'initial'}
                 && count === 4 ? {visibility: 'hidden'} : {visibility: 'visible'}}>
-                <RightArrow nextSlide={this.props.sliderActions.nextSlide} />
+                <RightArrow nextSlide={sliderActions.nextSlide} />
             </div>
         </div>
     );
