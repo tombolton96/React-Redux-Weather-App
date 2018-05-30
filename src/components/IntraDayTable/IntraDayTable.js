@@ -32,16 +32,58 @@ class IntraDayTable extends Component {
     }
 
     getRows(intraDayArray) {
-        return intraDayArray.map((obj, i) => {
-            const time = new Date(obj.date*1000).toLocaleTimeString();
+        
+    }
 
-            return(
-                <tr key={i} style={{width:'100%'}}>
-                    <td style={{fontWeight:'bold'}}>{time.substring(0, time.length-3)}</td>
-                    {this.setUnits(obj.tempC, obj.tempF)}
-                    <td className='capitalise'>{obj.description}</td>
-                    <td><img width='30px' height='30px' src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td>
-                </tr>
+    getTimes(intraDayArray) {
+        return intraDayArray.map((obj) => {
+            const date = new Date(obj.date*1000);
+            const hr = `0${date.getHours()}`;
+            const min = `0${date.getMinutes()}`;
+
+            return (
+                <td style={{fontWeight:'bold'}}>{hr.slice(-2)}:{min.slice(-2)}</td>
+            );
+        });
+    }
+
+    getTemps(intraDayArray) {
+        return intraDayArray.map((obj) => this.setUnits(obj.tempC, obj.tempF));
+    }
+
+    getDescriptions(intraDayArray) {
+        return intraDayArray.map((obj) => {
+            return (
+                <td className='capitalise'>{obj.description}</td>
+            );
+        });
+    }
+
+    getIcons(intraDayArray) {
+        return intraDayArray.map((obj) => {
+            return (
+                <td><img width='30px' height='30px' src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td> 
+            );
+        });
+    }
+
+    getHumidity(intraDayArray) {
+        return intraDayArray.map((obj) => {
+            return (
+                <td><i style={{color:'navy'}} className='fa fa-tint'><span style={{fontFamily:'raleway', color:'#fff'}}>{obj.humidity}%</span></i></td>
+            );
+        });
+    }
+
+    getWind(intraDayArray) {
+        return intraDayArray.map((obj) => {
+            const speed = obj.wind.speed;
+            const deg = <i style={{transform:`rotate(${parseInt(obj.wind.deg, 0)}deg)`}} className='fa fa-arrow-circle-up'></i>;
+
+            return (
+                <td>
+                    {deg} {speed}
+                </td>
             );
         });
     }
@@ -49,22 +91,22 @@ class IntraDayTable extends Component {
     render() {
         const { data } = this.state;
 
-        const wrapperStyle = {
-            margin: '5%',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-        };
-
         return data.length ? (
-            <div style={wrapperStyle}>
-                <table style={{borderCollapse:'collapse', width: '100%'}}>
-                    <tbody>
-                        {this.getRows(data)}    
-                    </tbody>
-                </table>
-                {this.props.children}
+            <div className='outer'>
+                <div className='wrapper'>
+                    <table style={{borderCollapse:'collapse', width: '100%'}}>
+                        <tbody>
+                            {/* {this.getRows(data)} */}
+                            <tr>{this.getTimes(data)}</tr>
+                            <tr>{this.getIcons(data)}</tr>
+                            <tr>{this.getTemps(data)}</tr>
+                            <tr>{this.getHumidity(data)}</tr>
+                            <tr>{this.getWind(data)}</tr>
+                            {/* <tr>{this.getDescriptions(data)}</tr> */}
+                        </tbody>
+                    </table>
+                    {this.props.children}
+                </div>
             </div>
         ) : <div>There is currently no data to display for this day</div>;
     }

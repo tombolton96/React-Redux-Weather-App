@@ -95,7 +95,12 @@ class App extends Component {
     });
   }
 
-  getSunTimes = time => new Date(time * 1000).toLocaleTimeString();
+  getSunTimes = time => {
+    const hr =`0${new Date(time * 1000).getHours()}`;
+    const min = `0${new Date(time * 1000).getMinutes()}`;
+
+    return `${hr.slice(-2)}:${min.slice(-2)}`;
+  };
 
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
@@ -144,8 +149,8 @@ class App extends Component {
             <Slider arrows={false}>
               <IntraDayTable data={intraDay[0]} unit={units}>
                 <div style={{textAlign:'center'}}>
-                  <p><span style={{fontWeight:'bold'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
-                  <p><span style={{fontWeight:'bold'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
+                  <p><span style={{fontWeight:'bolder'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
+                  <p><span style={{fontWeight:'bolder'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
                 </div>
               </IntraDayTable>
               <IntraDayTable data={intraDay[1]} unit={units}/>

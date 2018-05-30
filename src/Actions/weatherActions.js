@@ -37,7 +37,12 @@ export function receiveWeather(data) {
         city: data.name,
         country: data.sys.country,
         sunrise: data.sys.sunrise,
-        sunset: data.sys.sunset
+        sunset: data.sys.sunset,
+        humidity: data.main.humidity,
+        wind: {
+            speed: Math.round(data.wind.speed*10)/10,
+            deg: data.wind.deg
+        }
     } : {id:800};
     return {type: types.RECEIVE_WEATHER, weather};
 }
@@ -50,6 +55,11 @@ export function receiveForecast(data) {
             tempC: Math.round(p.main.temp*10)/10,
             tempF: Math.round(convertToFahrenheit(p.main.temp)*10)/10,
             description: p.weather[0].description,
+            humidity: p.main.humidity,
+            wind: {
+                speed: Math.round(p.wind.speed*10)/10,
+                deg: p.wind.deg
+            },
             icon: p.weather[0].icon
         };
     });
