@@ -1,1 +1,1 @@
-export const CHANGE_SLIDE = 'CHANGE_SLIDE';
+export const SET_SLIDE = 'SET_SLIDE';

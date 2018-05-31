@@ -95,7 +95,12 @@ class App extends Component {
     });
   }
 
-  getSunTimes = time => new Date(time * 1000).toLocaleTimeString();
+  getSunTimes = time => {
+    const hr =`0${new Date(time * 1000).getHours()}`;
+    const min = `0${new Date(time * 1000).getMinutes()}`;
+
+    return `${hr.slice(-2)}:${min.slice(-2)}`;
+  };
 
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
@@ -130,11 +135,15 @@ class App extends Component {
 
             <SearchBar searchAction={weatherActions.search}/>
             <UnitSwitch unit={units}/>
-            <h2 style={headerStyle}>{weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span></h2>
+
+            <h2 style={headerStyle}>
+              {weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span>
+            </h2>
+
             <Indicator />
 
             <Slider arrows={true}>
-              <DayCard weather={weather} unit={units}/>
+              <DayCard weather={weather} unit={units} />
               <DayCard weather={this.getDays(forecast)[0]} unit={units} />
               <DayCard weather={this.getDays(forecast)[1]} unit={units} />
               <DayCard weather={this.getDays(forecast)[2]} unit={units} />
@@ -153,6 +162,7 @@ class App extends Component {
               <IntraDayTable data={intraDay[3]} unit={units}/>
               <IntraDayTable data={intraDay[4]} unit={units}/>              
             </Slider>
+
           </div>
         </div>
       );

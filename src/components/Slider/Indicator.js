@@ -1,27 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './indicator.scss';
+import React from 'react';
+import InidicatorBar from './IndicatorBar';
 
-class Indicator extends Component {
-    render() {
-        const { sliderCount } = this.props;
-
-        return(
-            <div className='indicator'>
-                <div className={sliderCount === 0 ? 'selected' : 'notselected'}></div>
-                <div className={sliderCount === 1 ? 'selected' : 'notselected'}></div>
-                <div className={sliderCount === 2 ? 'selected' : 'notselected'}></div>
-                <div className={sliderCount === 3 ? 'selected' : 'notselected'}></div>
-                <div className={sliderCount === 4 ? 'selected' : 'notselected'}></div>
-            </div>
-        );
-    }
+const Indicator = () => {
+    return (
+        <div className='indicator'>
+            <InidicatorBar slideNo={0}/>
+            <InidicatorBar slideNo={1}/>
+            <InidicatorBar slideNo={2}/>
+            <InidicatorBar slideNo={3}/>
+            <InidicatorBar slideNo={4}/>
+        </div>
+    );
 }
 
-function mapStateToProps(state) {
-    return {
-        sliderCount: state.sliderCount
-    };
-}
-
-export default connect(mapStateToProps)(Indicator);
+export default Indicator;

@@ -1,14 +1,30 @@
  table {
     border-collapse: collapse;
-    width: 90%;
+    width: 100%;
 
     td {
-        width: 15%;
+        padding: 8px 10px;
         text-align: center;
-        border-bottom: 1px inset rgba(255,255,255,0.3);
+        border-right: 1px inset rgba(255,255,255,0.3);
+
+        &:nth-last-child(1) {
+            border-right: none;
+        }
     }
+}
+
+.wrapper {
+    margin: 5%;
+    width: 300px;
+    overflow-x: auto;
 }
 
 .capitalise:first-letter {
     text-transform: capitalize;
+}
+
+@media only screen and (min-width: 430px) {
+    .wrapper {
+        width: 100%;
+    }
 }
