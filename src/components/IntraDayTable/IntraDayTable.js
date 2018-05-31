@@ -92,21 +92,16 @@ class IntraDayTable extends Component {
         const { data } = this.state;
 
         return data.length ? (
-            <div className='outer'>
-                <div className='wrapper'>
-                    <table style={{borderCollapse:'collapse', width: '100%'}}>
-                        <tbody>
-                            {/* {this.getRows(data)} */}
-                            <tr>{this.getTimes(data)}</tr>
-                            <tr>{this.getIcons(data)}</tr>
-                            <tr>{this.getTemps(data)}</tr>
-                            <tr>{this.getHumidity(data)}</tr>
-                            <tr>{this.getWind(data)}</tr>
-                            {/* <tr>{this.getDescriptions(data)}</tr> */}
-                        </tbody>
-                    </table>
-                    {this.props.children}
-                </div>
+            <div className='wrapper'>
+                <table style={{borderCollapse:'collapse', width: '100%'}}>
+                    <tbody>
+                        <tr>{this.getTimes(data)}</tr>
+                        <tr>{this.getIcons(data)}</tr>
+                        <tr>{this.getTemps(data)}</tr>
+                        <tr>{this.getHumidity(data)}</tr>
+                        <tr>{this.getWind(data)}</tr>
+                    </tbody>
+                </table>
             </div>
         ) : <div>There is currently no data to display for this day</div>;
     }

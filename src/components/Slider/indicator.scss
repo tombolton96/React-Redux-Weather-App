@@ -5,18 +5,18 @@
     margin: 20px 10px;
 
     div {
-        height: 1px;
         width: 100%;
         margin: 0 5px;
+        font-size: 1.3em;
     }
 }
 
 .selected {
-    border: 1px solid rgba(255,255,255,1);
-    background-color: rgba(255,255,255,1);
+    border-top: 2px solid rgba(255,255,255,1);
+    color: rgba(255,255,255,1);
 }
 
 .notselected {
-    border: 1px solid rgba(255,255,255,0.1);
-    background-color: rgba(255,255,255,0.1);
+    border-top: 2px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.4);
 }

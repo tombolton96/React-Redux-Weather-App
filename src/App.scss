@@ -3,6 +3,7 @@
 body {
     color: #fff;
     font-family: Raleway, sans-serif;
+    font-size: 22px;
     margin: 0;
     padding: 0;
     background-attachment: fixed;
@@ -12,7 +13,6 @@ body {
     position: absolute;
     z-index: 1;
 }
-
 
 @keyframes loading {
     from {opacity:1;}

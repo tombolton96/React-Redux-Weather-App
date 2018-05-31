@@ -147,17 +147,18 @@ class App extends Component {
             </Slider>
 
             <Slider arrows={false}>
-              <IntraDayTable data={intraDay[0]} unit={units}>
-                <div style={{textAlign:'center'}}>
-                  <p><span style={{fontWeight:'bolder'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
-                  <p><span style={{fontWeight:'bolder'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
-                </div>
-              </IntraDayTable>
+              <IntraDayTable data={intraDay[0]} unit={units}/>
               <IntraDayTable data={intraDay[1]} unit={units}/>
               <IntraDayTable data={intraDay[2]} unit={units}/>
               <IntraDayTable data={intraDay[3]} unit={units}/>
               <IntraDayTable data={intraDay[4]} unit={units}/>              
             </Slider>
+
+              <div style={{textAlign:'center'}}>
+                <p><span style={{fontWeight:'bolder'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
+                <p><span style={{fontWeight:'bolder'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
+              </div>
+
           </div>
         </div>
       );
