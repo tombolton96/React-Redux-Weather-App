@@ -5,9 +5,10 @@ import * as sliderActions from '../../Actions/sliderActions';
 import './indicator.scss';
 
 const InidicatorBar = props => {
+    const { sliderActions, slideNo, sliderCount } = props;
 
     function setSlide() {
-        props.sliderActions.setSlide(props.slideNo); 
+        sliderActions.setSlide(slideNo); 
     }
 
     function getDay(num) {
@@ -56,7 +57,11 @@ const InidicatorBar = props => {
     }
 
     return (
-        <div onClick={setSlide} className={props.sliderCount === props.slideNo ? 'selected' : 'notselected'}>{getDay(props.slideNo)}</div>
+        <div onClick={setSlide} className={sliderCount === slideNo ? 'selected' : 'notselected'}>
+
+            {getDay(slideNo)}
+            
+        </div>
     );
 }
 
