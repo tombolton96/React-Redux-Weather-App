@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-//Stylesheets
-// import theme from '../../index.scss';
 import './DayCard.scss';
 
 class DayCard extends Component {
@@ -82,12 +80,17 @@ class DayCard extends Component {
 
         return this.state.description ? (
             <div style={cardStyle}>
+
                 <h3>{day}</h3>
+
                     <div style={tempStyle}>
                         {this.setUnits()}
                     </div>
+
                     <img src={`https://openweathermap.org/img/w/${icon}.png`} alt={description}/>
+
                     <p className='capitalise'>{description}</p>
+
             </div>) : (<h4>Please search for location</h4>);
     }
 }

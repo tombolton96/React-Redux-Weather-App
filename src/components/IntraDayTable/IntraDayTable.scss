@@ -15,16 +15,16 @@
 
 .wrapper {
     margin: 5%;
-    // height: 100%;
     width: 300px;
-    // padding-bottom: 20px;
-    // box-sizing: content-box;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
     overflow-x: auto;
 }
 
 .capitalise:first-letter {
     text-transform: capitalize;
+}
+
+@media only screen and (min-width: 430px) {
+    .wrapper {
+        width: 100%;
+    }
 }

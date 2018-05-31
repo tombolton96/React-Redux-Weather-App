@@ -12,11 +12,11 @@
 }
 
 .selected {
-    border-top: 2px solid rgba(255,255,255,1);
+    border-bottom: 2px solid rgba(255,255,255,1);
     color: rgba(255,255,255,1);
 }
 
 .notselected {
-    border-top: 2px solid rgba(255,255,255,0.1);
+    border-top: 2px solid rgba(255,255,255,0.4);
     color: rgba(255,255,255,0.4);
 }
