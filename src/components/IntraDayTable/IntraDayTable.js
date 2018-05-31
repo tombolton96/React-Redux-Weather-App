@@ -6,7 +6,6 @@ class IntraDayTable extends Component {
         super(props);
 
         this.setUnits = this.setUnits.bind(this);
-        this.getRows = this.getRows.bind(this);
 
         this.state = {
             data: [],
@@ -21,18 +20,14 @@ class IntraDayTable extends Component {
         });
     }
 
-    setUnits(tempC, tempF) {
+    setUnits(tempC, tempF, i) {
         switch(this.state.units) {
             case 'fahrenheit':
-                return(<td>{tempF}&deg;F</td>);
+                return <td key={`${i}.${tempF}`}>{tempF}&deg;F</td>;
             case 'celsius':
             default:
-                return(<td>{tempC}&deg;C</td>);
+                return <td key={`${i}.${tempC}`}>{tempC}&deg;C</td>;
         }
-    }
-
-    getRows(intraDayArray) {
-        
     }
 
     getTimes(intraDayArray) {
@@ -42,46 +37,49 @@ class IntraDayTable extends Component {
             const min = `0${date.getMinutes()}`;
 
             return (
-                <td style={{fontWeight:'bold'}}>{hr.slice(-2)}:{min.slice(-2)}</td>
+                <td key={obj.date} style={{fontWeight:'bold'}}>{hr.slice(-2)}:{min.slice(-2)}</td>
             );
         });
     }
 
     getTemps(intraDayArray) {
-        return intraDayArray.map((obj) => this.setUnits(obj.tempC, obj.tempF));
-    }
-
-    getDescriptions(intraDayArray) {
-        return intraDayArray.map((obj) => {
-            return (
-                <td className='capitalise'>{obj.description}</td>
-            );
-        });
+        return intraDayArray.map((obj, index) => this.setUnits(obj.tempC, obj.tempF, index));
     }
 
     getIcons(intraDayArray) {
-        return intraDayArray.map((obj) => {
+        return intraDayArray.map((obj, index) => {
             return (
-                <td><img width='30px' height='30px' src={`https://openweathermap.org/img/w/${obj.icon}.png`} alt={obj.description}/></td> 
+                <td key={`${index}.${obj.tempC}`}>
+                    <img 
+                        width='50px' 
+                        height='50px' 
+                        src={`https://openweathermap.org/img/w/${obj.icon}.png`} 
+                        alt={obj.description}
+                    />
+                </td> 
             );
         });
     }
 
     getHumidity(intraDayArray) {
-        return intraDayArray.map((obj) => {
+        return intraDayArray.map((obj, index) => {
             return (
-                <td><i style={{color:'navy'}} className='fa fa-tint'><span style={{fontFamily:'raleway', color:'#fff'}}>{obj.humidity}%</span></i></td>
+                <td key={`${index}.${obj.humidity}`}>
+                    <i style={{color:'navy'}} className='fa fa-tint'>
+                        <span style={{fontFamily:'raleway', color:'#fff'}}>{obj.humidity}%</span>
+                    </i>
+                </td>
             );
         });
     }
 
     getWind(intraDayArray) {
-        return intraDayArray.map((obj) => {
+        return intraDayArray.map((obj, index) => {
             const speed = obj.wind.speed;
-            const deg = <i style={{transform:`rotate(${parseInt(obj.wind.deg, 0)}deg)`}} className='fa fa-arrow-circle-up'></i>;
+            const deg = <i style={{transform:`rotate(${parseInt(obj.wind.deg, 0)}deg)`}} className='fa fa-arrow-circle-down'></i>;
 
             return (
-                <td>
+                <td key={`${index}.${obj.wind.deg}`}>
                     {deg} {speed}
                 </td>
             );
