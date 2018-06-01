@@ -26,7 +26,7 @@ button {
     }
 }
 
-input {
+input, select {
     border-radius: 50px;
     outline: none;
     border: 1px solid #fff;
@@ -36,7 +36,6 @@ input {
     color: #fff;
     font-family: inherit;
     font-size: 1.25em;
-    width: 35%;
 
     &::placeholder {
         color: #fff;
@@ -44,5 +43,17 @@ input {
 
     &:focus {
         box-shadow: 0 0 20px rgba(221,221,221, 1);
+    }
+}
+
+input {
+    width: 30%;
+}
+
+select {
+    width: 40%;
+    
+    option {
+        color:#000;
     }
 }

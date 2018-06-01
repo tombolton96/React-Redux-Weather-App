@@ -67,7 +67,7 @@ class SearchBar extends Component {
                 <input id='country' aria-label="city" placeholder="City" value={city} onChange={this.getCity} />
                 
                 <select aria-label="city-dropdown" name="country" value={country} onChange={this.getCountry}>
-                    <option value="" disabled hidden>Select Country</option>
+                    <option style={{fontWeight:'bold'}} value="" disabled>Country</option>
                     {this.createOptions(this.getCountries())}
                 </select>
 
