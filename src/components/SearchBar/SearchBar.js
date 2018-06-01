@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import iso3166 from 'iso-3166-2'; //Converts country names to codes
+import iso3166 from 'iso-3166-2';
 import './SearchBar.scss';
-import Dropdown from './Dropdown';
 
 class SearchBar extends Component {
     constructor() {
         super();
 
-        this.getCityName = this.getCityName.bind(this);
-        this.getCountryName = this.getCountryName.bind(this);
+        this.getCity = this.getCity.bind(this);
+        this.getCountry = this.getCountry.bind(this);
         this.dispatchSearch = this.dispatchSearch.bind(this);
 
         this.state = {
@@ -17,21 +16,40 @@ class SearchBar extends Component {
         };
     }
 
-    getCityName(event) {
+    getCity(event) {
         this.setState({
             ...this.state,
             city: event.target.value
         });
     }
 
-    getCountryName(event) {
+    getCountries() {
+        const countries = [];
+
+        for (let d in iso3166.data) {
+            const country = {
+                name: iso3166.data[d].name,
+                code: d
+            };
+            countries.push(country);
+        }
+        return countries;
+    }
+
+    createOptions(countries) {
+        return countries.map((country) => {
+            return (
+                <option key={country.code} value={country.code}>{country.name}</option>
+            );
+        });
+    }
+
+    getCountry(event) {
         this.setState({
             ...this.state,
             country: event.target.value
         });
     }
-
-    getCountryCode = country => country ? iso3166.country(country).code : undefined;
 
     dispatchSearch() {
         this.props.searchAction(this.state.city, this.state.country);
@@ -46,9 +64,13 @@ class SearchBar extends Component {
 
         return(
             <div className="searchbar">
-                <input id='country' aria-label="city" placeholder="City" value={city} onChange={this.getCityName} />
-                {/* <input aria-label="country" placeholder="Country" value={country} onChange={this.getCountryName} /> */}
-                <Dropdown getCountry={this.getCountryName}/>
+                <input id='country' aria-label="city" placeholder="City" value={city} onChange={this.getCity} />
+                
+                <select aria-label="city-dropdown" name="country" value={country} onChange={this.getCountry}>
+                    <option value="" disabled hidden>Select Country</option>
+                    {this.createOptions(this.getCountries())}
+                </select>
+
                 <button disabled={!city} name="search" aria-label="search" className="fa fa-search" onClick={this.dispatchSearch} ></button>
             </div>
         );
