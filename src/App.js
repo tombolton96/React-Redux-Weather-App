@@ -46,7 +46,8 @@ class App extends Component {
       case first === '2':
         document.body.className = 'storm';
         break;
-      case first === '3' || first === '5':
+      case first === '3':
+      case first === '5':
         document.body.className = 'rain';
         break;
       case first === '6':
@@ -104,7 +105,7 @@ class App extends Component {
 
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
-      
+
     const { weatherActions, units } = this.props;
 
     const intraDay = this.getDayData(forecast);
@@ -123,14 +124,14 @@ class App extends Component {
       textAlign:'center',
       fontSize:'2em'
     };
-    
+
     return isLoading ? (<div className='loading'>Loading...</div>)
       : (<div style={appStyle}>
 
           <div style={searching ? {display:'block'} : {display:'none'}} className='searchingContainer'>
             <Searching/>
           </div>
-          
+
           <div style={searching ? {filter: 'blur(2px)'} : {}}>
 
             <SearchBar searchAction={weatherActions.search}/>
@@ -160,7 +161,7 @@ class App extends Component {
               <IntraDayTable data={intraDay[1]} unit={units}/>
               <IntraDayTable data={intraDay[2]} unit={units}/>
               <IntraDayTable data={intraDay[3]} unit={units}/>
-              <IntraDayTable data={intraDay[4]} unit={units}/>              
+              <IntraDayTable data={intraDay[4]} unit={units}/>
             </Slider>
 
           </div>
