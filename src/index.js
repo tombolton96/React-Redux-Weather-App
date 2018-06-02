@@ -32,18 +32,3 @@ prompt.userChoice
         prompt = null;
     });
 });
-
-// prompt.prompt();
-// prompt.userChoice
-//     .then((choiceResult) => {
-//         if (choiceResult.outcome === 'accepted') {
-//             console.log('User accepted A2HS prompt');
-//         } else {
-//             console.log('User dismissed A2HS prompt');
-//         }
-//         prompt = null;
-//     });
-
-    // window.addEventListener('appinstalled', (e) => {
-    //     app.logEvent('a2hs', 'installed');
-    // });
