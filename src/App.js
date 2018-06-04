@@ -28,8 +28,12 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
-    this.props.locationActions.fetchLocation();    
+  componentWillMount() {    
+    if(sessionStorage.length === 2) {
+      this.props.weatherActions.fetchWeather(sessionStorage.getItem('latitude'), sessionStorage.getItem('longitude'));
+    } else {
+      this.props.locationActions.fetchLocation();
+    }
   }
 
   componentWillReceiveProps(newProps) {
@@ -142,7 +146,7 @@ class App extends Component {
             <SearchBar searchAction={weatherActions.search}/>
             <UnitSwitch unit={units}/>
 
-            <h2 style={headerStyle}>
+            <h2 style={headerStyle}>                                 
               {weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span>
             </h2>
 
