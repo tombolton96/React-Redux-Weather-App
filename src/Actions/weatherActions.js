@@ -27,6 +27,9 @@ function convertToFahrenheit(temp) {
 
 export function receiveWeather(data) {
 
+    sessionStorage.setItem('latitude', data.coord.lat);
+    sessionStorage.setItem('longitude', data.coord.lon);
+
     const weather = data.weather ? {
         id: data.weather[0].id,
         description: data.weather[0].description,
@@ -67,9 +70,8 @@ export function receiveForecast(data) {
 }
 
 export function fetchWeather(lat, lon) {
+
     return dispatch => {
-        // const location = navigator.geolocation;
-        // location.getCurrentPosition(position => {
             
             fetch(url(lat, lon))
                 .then(response => response.json())
@@ -80,11 +82,6 @@ export function fetchWeather(lat, lon) {
                 .then(response => response.json())
                 .then(json => dispatch(receiveForecast(json)))
                 .catch(error => console.log(error));
-
-        // }, error => {
-        //      console.log(error);
-        //      dispatch(receiveWeather());
-        // });
     };
 }
 

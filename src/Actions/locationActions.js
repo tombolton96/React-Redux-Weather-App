@@ -16,8 +16,8 @@ export function fetchLocation() {
             dispatch(receiveLocation(position.coords.longitude, position.coords.latitude));
             dispatch(fetchWeather(position.coords.latitude, position.coords.longitude));
 
-            sessionStorage.setItem('longitude', position.coords.longitude);
-            sessionStorage.setItem('latitude', position.coords.latitude);
+            // sessionStorage.setItem('longitude', position.coords.longitude);
+            // sessionStorage.setItem('latitude', position.coords.latitude);
 
         }, error => {
             console.error(error);
