@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //actions
 import * as weatherActions from './Actions/weatherActions';
+import * as locationActions from './Actions/locationActions';
 //stylesheets
 import './index.scss';
 import './App.scss';
@@ -27,7 +28,9 @@ class App extends Component {
     };
   }
 
-  componentWillMount = () => this.props.weatherActions.fetchWeather();
+  componentWillMount() {
+    this.props.locationActions.fetchLocation();    
+  }
 
   componentWillReceiveProps(newProps) {
     this.setState({
@@ -38,7 +41,9 @@ class App extends Component {
     });
   }
 
-  componentDidUpdate = () => this.setBackground(this.state.weather.id);
+  componentDidUpdate = () => {
+    this.setBackground(this.state.weather.id);
+  }
 
   setBackground(id) {
     let first = String(id).charAt(0);
@@ -173,6 +178,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     weather: state.weather,
+    location: state.location,
     forecast: state.forecast,
     searching: state.searching,
     units: state.units
@@ -181,7 +187,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    weatherActions: bindActionCreators(weatherActions, dispatch)
+    weatherActions: bindActionCreators(weatherActions, dispatch),
+    locationActions: bindActionCreators(locationActions, dispatch)
   };
 }
 

@@ -66,25 +66,25 @@ export function receiveForecast(data) {
     return {type: types.RECEIVE_FORECAST, forecast};
 }
 
-export function fetchWeather() {
+export function fetchWeather(lat, lon) {
     return dispatch => {
-        const location = navigator.geolocation;
-        location.getCurrentPosition(position => {
+        // const location = navigator.geolocation;
+        // location.getCurrentPosition(position => {
             
-            fetch(url(position.coords.latitude, position.coords.longitude))
+            fetch(url(lat, lon))
                 .then(response => response.json())
                 .then(json => dispatch(receiveWeather(json)))
                 .catch(error => console.log(error));
 
-            fetch(forecastUrl(position.coords.latitude, position.coords.longitude))
+            fetch(forecastUrl(lat, lon))
                 .then(response => response.json())
                 .then(json => dispatch(receiveForecast(json)))
                 .catch(error => console.log(error));
 
-        }, error => {
-             console.log(error);
-             dispatch(receiveWeather());
-        });
+        // }, error => {
+        //      console.log(error);
+        //      dispatch(receiveWeather());
+        // });
     };
 }
 
