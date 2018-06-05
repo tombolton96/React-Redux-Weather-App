@@ -15,6 +15,7 @@ import Slider from './components/Slider/Slider';
 import Searching from './components/Searching/Searching';
 import UnitSwitch from './components/UnitSwitch/UnitSwitch';
 import Indicator from './components/Slider/Indicator';
+import ButtonBar from './components/ButtonBar/ButtonBar';
 
 class App extends Component {
   constructor() {
@@ -115,7 +116,7 @@ class App extends Component {
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
 
-    const { weatherActions, units } = this.props;
+    const { weatherActions, locationActions, units } = this.props;
 
     const intraDay = this.getDayData(forecast);
 
@@ -143,6 +144,7 @@ class App extends Component {
 
           <div style={searching ? {filter: 'blur(2px)'} : {}}>
 
+            <ButtonBar location={locationActions.fetchLocation} />
             <SearchBar searchAction={weatherActions.search}/>
             <UnitSwitch unit={units}/>
 
