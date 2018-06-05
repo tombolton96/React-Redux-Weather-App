@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const ButtonBar = props => {
+class ButtonBar extends Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <div>
-            <button aria-label="home" className="fa fa-home"></button>
-            <button onClick={props.location} aria-label="location" className="fa fa-compass"></button>
-            <button aria-label="settings" className="fa fa-cog"></button>
-        </div>
-    );
+        this.setHome = this.setHome.bind(this);
+    }
+
+    setHome() {
+        localStorage.setItem('latitude', this.props.location.latitude);
+        localStorage.setItem('longitude', this.props.location.longitude);
+
+        alert('Set as home location');
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.props.home} aria-label="home" className="fa fa-home"></button>
+                <button onClick={this.setHome}  aria-label="set_home" className="fa fa-map-pin"></button>
+                <button onClick={this.props.fetch} aria-label="location" className="fa fa-compass"></button>
+            </div>
+        );
+    }
 };
 
-export default ButtonBar;
+function mapStateToProps(state) {
+    return {
+        location: state.location
+    };
+}
+
+export default connect(mapStateToProps)(ButtonBar);

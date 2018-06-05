@@ -111,12 +111,12 @@ class App extends Component {
     const min = `0${new Date(time * 1000).getMinutes()}`;
 
     return `${hr.slice(-2)}:${min.slice(-2)}`;
-  };
+  }
 
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
 
-    const { weatherActions, locationActions, units } = this.props;
+    const { weatherActions, locationActions, location, units } = this.props;
 
     const intraDay = this.getDayData(forecast);
 
@@ -144,7 +144,7 @@ class App extends Component {
 
           <div style={searching ? {filter: 'blur(2px)'} : {}}>
 
-            <ButtonBar location={locationActions.fetchLocation} />
+            <ButtonBar fetch={locationActions.fetchLocation} />
             <SearchBar searchAction={weatherActions.search}/>
             <UnitSwitch unit={units}/>
 

@@ -9,8 +9,6 @@ export default function location(state = initialState.location, action) {
         case RECEIVE_LOCATION:
             newState = action.location;
             return newState;
-        // case SEARCH_LOCATION:
-        //     return action;
         default:
             return state;
     }

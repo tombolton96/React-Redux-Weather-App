@@ -1,5 +1,6 @@
 import * as types from './weatherActionTypes';
 import { SEARCHING } from './miscActionTypes';
+import { receiveLocation } from './locationActions';
 
 const key = process.env.REACT_APP_API_KEY;
 
@@ -41,11 +42,7 @@ export function receiveWeather(data) {
         country: data.sys.country,
         sunrise: data.sys.sunrise,
         sunset: data.sys.sunset,
-        humidity: data.main.humidity,
-        wind: {
-            speed: Math.round(data.wind.speed*10)/10,
-            deg: data.wind.deg
-        }
+        humidity: data.main.humidity
     } : {id:800};
     return {type: types.RECEIVE_WEATHER, weather};
 }
@@ -99,7 +96,10 @@ export function search(city, country) {
                     return response.json();
                 }
             })
-            .then(json => dispatch(receiveWeather(json)))
+            .then(json => {
+                dispatch(receiveLocation(json.coord.lon, json.coord.lat));
+                dispatch(receiveWeather(json));
+            })
             .catch(error => console.log(error));
 
         fetch(searchForecastUrl(city, country))
