@@ -144,7 +144,7 @@ class App extends Component {
 
           <div style={searching ? {filter: 'blur(2px)'} : {}}>
 
-            <ButtonBar fetch={locationActions.fetchLocation} />
+            <ButtonBar fetchLocation={locationActions.fetchLocation}/>
             <SearchBar searchAction={weatherActions.search}/>
             <UnitSwitch unit={units}/>
 
