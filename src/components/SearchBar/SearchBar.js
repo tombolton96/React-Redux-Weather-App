@@ -71,7 +71,7 @@ class SearchBar extends Component {
                     {this.createOptions(this.getCountries())}
                 </select>
 
-                <button disabled={!city} name="search" aria-label="search" className="fa fa-search" onClick={this.dispatchSearch} ></button>
+                <button disabled={!city} name="search" aria-label="search" className="fa fa-search fa-lg" onClick={this.dispatchSearch} ></button>
             </div>
         );
     }

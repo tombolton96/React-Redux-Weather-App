@@ -4,13 +4,16 @@
     justify-content:center;
     margin:10px;
 
+    .switchborder {
+        // border: 1px solid #fff;
+        // border-radius: 60px;
+    }
+
     button {
         font-size: 1em;
     }
 }
 
 .buttonPressed {
-    border: 2px inset rgba(255,255,255, 0.5);
-    background: linear-gradient(to bottom right, rgba(190,190,190,0.5), rgba(190,190,190,0.3));
     color: rgb(190,190,190);
 }

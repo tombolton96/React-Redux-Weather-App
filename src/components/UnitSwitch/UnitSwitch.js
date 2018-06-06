@@ -9,15 +9,17 @@ const UnitSwitch = props => {
 
     return (
         <div className='switch'>
-            <button 
-                className={unit === 'celsius' ? 'buttonPressed' : ''} 
-                aria-label='celsius' 
-                onClick={unitActions.toCelsius}>&deg;C</button>
+            <div className='switchborder'>
+                <button 
+                    className={unit === 'celsius' ? 'buttonPressed' : ''} 
+                    aria-label='celsius' 
+                    onClick={unitActions.toCelsius}>&deg;C</button>
 
-            <button 
-                className={unit === 'fahrenheit' ? 'buttonPressed' : ''} 
-                aria-label='fahrenheit' 
-                onClick={unitActions.toFahrenheit}>&deg;F</button>
+                <button 
+                    className={unit === 'fahrenheit' ? 'buttonPressed' : ''} 
+                    aria-label='fahrenheit' 
+                    onClick={unitActions.toFahrenheit}>&deg;F</button>
+            </div>
         </div>
     );
 }
