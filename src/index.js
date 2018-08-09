@@ -11,7 +11,7 @@ import App from './App';
 
 const store = configureStore();
 
-require('dotenv').config()
+require('dotenv').config();
 
 ReactDOM.render(<Provider store={store} ><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();

@@ -116,7 +116,7 @@ class App extends Component {
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
 
-    const { weatherActions, locationActions, location, units } = this.props;
+    const { weatherActions, locationActions, units } = this.props;
 
     const intraDay = this.getDayData(forecast);
 

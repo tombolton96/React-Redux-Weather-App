@@ -28,6 +28,8 @@ function convertToFahrenheit(temp) {
 
 export function receiveWeather(data) {
 
+    console.log(data);
+
     sessionStorage.setItem('latitude', data.coord.lat);
     sessionStorage.setItem('longitude', data.coord.lon);
 
