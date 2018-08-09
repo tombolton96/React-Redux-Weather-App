@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //actions
 import * as weatherActions from './Actions/weatherActions';
+import * as locationActions from './Actions/locationActions';
 //stylesheets
 import './index.scss';
 import './App.scss';
@@ -14,6 +15,7 @@ import Slider from './components/Slider/Slider';
 import Searching from './components/Searching/Searching';
 import UnitSwitch from './components/UnitSwitch/UnitSwitch';
 import Indicator from './components/Slider/Indicator';
+import ButtonBar from './components/ButtonBar/ButtonBar';
 
 class App extends Component {
   constructor() {
@@ -27,7 +29,13 @@ class App extends Component {
     };
   }
 
-  componentWillMount = () => this.props.weatherActions.fetchWeather();
+  componentWillMount() {    
+    if(sessionStorage.length === 2) {
+      this.props.weatherActions.fetchWeather(sessionStorage.getItem('latitude'), sessionStorage.getItem('longitude'));
+    } else {
+      this.props.locationActions.fetchLocation();
+    }
+  }
 
   componentWillReceiveProps(newProps) {
     this.setState({
@@ -38,7 +46,9 @@ class App extends Component {
     });
   }
 
-  componentDidUpdate = () => this.setBackground(this.state.weather.id);
+  componentDidUpdate = () => {
+    this.setBackground(this.state.weather.id);
+  }
 
   setBackground(id) {
     let first = String(id).charAt(0);
@@ -101,12 +111,12 @@ class App extends Component {
     const min = `0${new Date(time * 1000).getMinutes()}`;
 
     return `${hr.slice(-2)}:${min.slice(-2)}`;
-  };
+  }
 
   render() {
     const { weather, forecast, isLoading, searching } = this.state;
 
-    const { weatherActions, units } = this.props;
+    const { weatherActions, locationActions, units } = this.props;
 
     const intraDay = this.getDayData(forecast);
 
@@ -134,10 +144,11 @@ class App extends Component {
 
           <div style={searching ? {filter: 'blur(2px)'} : {}}>
 
+            <ButtonBar fetchLocation={locationActions.fetchLocation}/>
             <SearchBar searchAction={weatherActions.search}/>
             <UnitSwitch unit={units}/>
 
-            <h2 style={headerStyle}>
+            <h2 style={headerStyle}>                                 
               {weather.city} <span style={{fontSize:'40%'}}>{weather.country}</span>
             </h2>
 
@@ -173,6 +184,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     weather: state.weather,
+    location: state.location,
     forecast: state.forecast,
     searching: state.searching,
     units: state.units
@@ -181,7 +193,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    weatherActions: bindActionCreators(weatherActions, dispatch)
+    weatherActions: bindActionCreators(weatherActions, dispatch),
+    locationActions: bindActionCreators(locationActions, dispatch)
   };
 }
 

@@ -11,18 +11,17 @@ button {
     line-height: 2em;
     height: 2em;
     width: 2em;
-    border: 2px outset rgba(190,190,190, 0.5);
+    border: none;
     color: #fff;
     padding: 0;
     margin-left: 2px;
-    background: linear-gradient(to bottom right, rgba(190,190,190,0.3), rgba(190,190,190,0.5));
+    background: none;
     cursor: pointer;
     outline: none;
     text-align: center;
 
     &:active {
-        border: 1px inset rgba(255,255,255, 0.5);
-        background: linear-gradient(to bottom right, rgba(190,190,190,0.5), rgba(190,190,190,0.3));
+        color: rgb(190,190,190);
     }
 }
 

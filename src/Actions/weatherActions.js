@@ -1,5 +1,6 @@
 import * as types from './weatherActionTypes';
 import { SEARCHING } from './miscActionTypes';
+import { receiveLocation } from './locationActions';
 
 const key = process.env.REACT_APP_API_KEY;
 
@@ -27,6 +28,11 @@ function convertToFahrenheit(temp) {
 
 export function receiveWeather(data) {
 
+    console.log(data);
+
+    sessionStorage.setItem('latitude', data.coord.lat);
+    sessionStorage.setItem('longitude', data.coord.lon);
+
     const weather = data.weather ? {
         id: data.weather[0].id,
         description: data.weather[0].description,
@@ -38,11 +44,7 @@ export function receiveWeather(data) {
         country: data.sys.country,
         sunrise: data.sys.sunrise,
         sunset: data.sys.sunset,
-        humidity: data.main.humidity,
-        wind: {
-            speed: Math.round(data.wind.speed*10)/10,
-            deg: data.wind.deg
-        }
+        humidity: data.main.humidity
     } : {id:800};
     return {type: types.RECEIVE_WEATHER, weather};
 }
@@ -66,25 +68,19 @@ export function receiveForecast(data) {
     return {type: types.RECEIVE_FORECAST, forecast};
 }
 
-export function fetchWeather() {
+export function fetchWeather(lat, lon) {
+
     return dispatch => {
-        const location = navigator.geolocation;
-        location.getCurrentPosition(position => {
             
-            fetch(url(position.coords.latitude, position.coords.longitude))
+            fetch(url(lat, lon))
                 .then(response => response.json())
                 .then(json => dispatch(receiveWeather(json)))
                 .catch(error => console.log(error));
 
-            fetch(forecastUrl(position.coords.latitude, position.coords.longitude))
+            fetch(forecastUrl(lat, lon))
                 .then(response => response.json())
                 .then(json => dispatch(receiveForecast(json)))
                 .catch(error => console.log(error));
-
-        }, error => {
-             console.log(error);
-             dispatch(receiveWeather());
-        });
     };
 }
 
@@ -102,7 +98,10 @@ export function search(city, country) {
                     return response.json();
                 }
             })
-            .then(json => dispatch(receiveWeather(json)))
+            .then(json => {
+                dispatch(receiveLocation(json.coord.lon, json.coord.lat));
+                dispatch(receiveWeather(json));
+            })
             .catch(error => console.log(error));
 
         fetch(searchForecastUrl(city, country))

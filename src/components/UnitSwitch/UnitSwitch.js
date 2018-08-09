@@ -8,16 +8,15 @@ const UnitSwitch = props => {
     const { unitActions, unit } = props;
 
     return (
-        <div className='switch'>
-            <button 
-                className={unit === 'celsius' ? 'buttonPressed' : ''} 
-                aria-label='celsius' 
-                onClick={unitActions.toCelsius}>&deg;C</button>
-
-            <button 
-                className={unit === 'fahrenheit' ? 'buttonPressed' : ''} 
-                aria-label='fahrenheit' 
-                onClick={unitActions.toFahrenheit}>&deg;F</button>
+        <div className="switchOuter">
+            &deg;C
+                <label className="switch">
+                    <input type="checkbox"
+                        checked={unitActions.celsius}
+                        onClick={ () => unit === 'fahrenheit' ? unitActions.toCelsius() : unitActions.toFahrenheit() } />
+                    <span className="slider round"></span>
+                </label>
+            &deg;F
         </div>
     );
 }

@@ -1,9 +1,10 @@
 {
   "name": "weather-app",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "homepage": "http://tombolton96.github.io/React-Weather-App",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
