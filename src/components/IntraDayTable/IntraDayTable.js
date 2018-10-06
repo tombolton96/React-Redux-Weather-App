@@ -65,9 +65,12 @@ class IntraDayTable extends Component {
         return intraDayArray.map((obj, index) => {
             return (
                 <td key={`${index}.${obj.humidity}`}>
-                    <i style={{color:'navy'}} className='fa fa-tint'>
+                    {/* <i style={{color:'navy'}} className='fa fa-tint'>
                         <span style={{fontFamily:'raleway', color:'#fff'}}>{obj.humidity}%</span>
-                    </i>
+                    </i> */}
+                    <span style={{fontFamily:'raleway', color:'#fff'}}>{obj.humidity}% 
+                        <span style={{color:'#000080', fontWeight:'bold'}}> Humidity</span>
+                    </span>
                 </td>
             );
         });
@@ -80,7 +83,7 @@ class IntraDayTable extends Component {
 
             return (
                 <td key={`${index}.${obj.wind.deg}`}>
-                    {deg} {speed}
+                    {deg} {speed} <span style={{fontSize:'0.6em'}}>m/s</span>
                 </td>
             );
         });
