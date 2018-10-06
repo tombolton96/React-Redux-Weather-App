@@ -164,10 +164,10 @@ class App extends Component {
 
             <Slider arrows={false}>
               <IntraDayTable data={intraDay[0]} unit={units}>
-                <div style={{textAlign:'center'}}>
+                {/* <div style={{textAlign:'center'}}>
                   <p><span style={{fontWeight:'bold'}}>Sunrise</span> {this.getSunTimes(weather.sunrise)}</p>
                   <p><span style={{fontWeight:'bold'}}>Sunset</span> {this.getSunTimes(weather.sunset)}</p>
-                </div>
+                </div> */}
               </IntraDayTable>
               <IntraDayTable data={intraDay[1]} unit={units}/>
               <IntraDayTable data={intraDay[2]} unit={units}/>
