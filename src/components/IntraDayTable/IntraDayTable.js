@@ -23,68 +23,68 @@ class IntraDayTable extends Component {
     setUnits(tempC, tempF, i) {
         switch(this.state.units) {
             case 'fahrenheit':
-                return <td key={`${i}.${tempF}`}>{tempF}&deg;F</td>;
+                return <div id={`temp_${i}`} key={`${i}.${tempF}`}>{tempF}&deg;F</div>;
             case 'celsius':
             default:
-                return <td key={`${i}.${tempC}`}>{tempC}&deg;C</td>;
+                return <div id={`temp_${i}`} key={`${i}.${tempC}`}>{tempC}&deg;C</div>;
         }
     }
 
     getTimes(intraDayArray) {
-        return intraDayArray.map((obj) => {
+        return intraDayArray.map((obj, i) => {
             const date = new Date(obj.date*1000);
             const hr = `0${date.getHours()}`;
             const min = `0${date.getMinutes()}`;
 
             return (
-                <td key={obj.date} style={{fontWeight:'bold'}}>{hr.slice(-2)}:{min.slice(-2)}</td>
+                <div id={`time_${i}`} key={obj.date} style={{fontWeight:'bold'}}>{hr.slice(-2)}:{min.slice(-2)}</div>
             );
         });
     }
 
     getTemps(intraDayArray) {
-        return intraDayArray.map((obj, index) => this.setUnits(obj.tempC, obj.tempF, index));
+        return intraDayArray.map((obj, i) => this.setUnits(obj.tempC, obj.tempF, i));
     }
 
     getIcons(intraDayArray) {
-        return intraDayArray.map((obj, index) => {
+        return intraDayArray.map((obj, i) => {
             return (
-                <td key={`${index}.${obj.tempC}`}>
+                <div id={`icon_${i}`} key={`${i}.${obj.tempC}`}>
                     <img 
                         width='50px' 
                         height='50px' 
                         src={`https://openweathermap.org/img/w/${obj.icon}.png`} 
                         alt={obj.description}
                     />
-                </td> 
+                </div> 
             );
         });
     }
 
     getHumidity(intraDayArray) {
-        return intraDayArray.map((obj, index) => {
+        return intraDayArray.map((obj, i) => {
             return (
-                <td key={`${index}.${obj.humidity}`}>
+                <div id={`hum_${i}`} key={`${i}.${obj.humidity}`}>
                     {/* <i style={{color:'navy'}} className='fa fa-tint'>
                         <span style={{fontFamily:'raleway', color:'#fff'}}>{obj.humidity}%</span>
                     </i> */}
                     <span style={{fontFamily:'raleway', color:'#fff'}}>{obj.humidity}% 
                         <span style={{color:'#000080', fontWeight:'bold'}}> Humidity</span>
                     </span>
-                </td>
+                </div>
             );
         });
     }
 
     getWind(intraDayArray) {
-        return intraDayArray.map((obj, index) => {
+        return intraDayArray.map((obj, i) => {
             const speed = obj.wind.speed;
             const deg = <i style={{transform:`rotate(${parseInt(obj.wind.deg, 0)}deg)`}} className='fa fa-arrow-circle-down'></i>;
 
             return (
-                <td key={`${index}.${obj.wind.deg}`}>
+                <div id={`wind_${i}`} key={`${i}.${obj.wind.deg}`}>
                     {deg} {speed} <span style={{fontSize:'0.6em'}}>m/s</span>
-                </td>
+                </div>
             );
         });
     }
@@ -94,15 +94,11 @@ class IntraDayTable extends Component {
 
         return data.length ? (
             <div className='wrapper'>
-                <table style={{borderCollapse:'collapse', width: '100%'}}>
-                    <tbody>
-                        <tr>{this.getTimes(data)}</tr>
-                        <tr>{this.getIcons(data)}</tr>
-                        <tr>{this.getTemps(data)}</tr>
-                        <tr>{this.getHumidity(data)}</tr>
-                        <tr>{this.getWind(data)}</tr>
-                    </tbody>
-                </table>
+                        {this.getTimes(data)}
+                        {this.getIcons(data)}
+                        {this.getTemps(data)}
+                        {this.getHumidity(data)}
+                        {this.getWind(data)}
                 {this.props.children}
             </div>
         ) : <div>There is currently no data to display for this day</div>;

@@ -32,38 +32,12 @@ body {
         color: #003366;
 }
 
-.clear {
-    background-image: $clearsky;
-}
-
-.storm {
-    background-image: $storm;
-}
-
-.snow {
-    background-image: $snow;
-    }
-
-.rain {
-    background-image: $rain;
-}
-
-.scattered {
-    background-image: $scattered;
-}
-
-.mist {
-    background-image: $mist;
-}
-
-.few {
-    background-image: $fewclouds;
-}
-
-.broken {
-    background-image: $broken;
-}
-
-.dark {
-    background-color: #000;
-}
+.clear { background-image: $clearsky; }
+.storm { background-image: $storm; }
+.snow { background-image: $snow; }
+.rain { background-image: $rain; }
+.scattered { background-image: $scattered; }
+.mist { background-image: $mist; }
+.few { background-image: $fewclouds; }
+.broken { background-image: $broken; }
+.dark { background-color: #000; }
